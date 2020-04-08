@@ -1,28 +1,16 @@
 {
   "expo": {
-    "name": "fin-family",
-    "slug": "fin-family",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "name": "Fin Family",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "version": "1.0.0",
+    "sdkVersion": "37.0.0",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.bandtec.finfamily",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.bandtec.finfamily",
+      "versionCode": 1
     }
+   }
   }
-}
