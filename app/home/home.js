@@ -16,6 +16,7 @@ import {
   processColor,
   ActivityIndicator,
   Dimensions,
+  StyleSheet,
 } from "react-native";
 
 class Home extends React.Component {

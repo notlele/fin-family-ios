@@ -16,9 +16,6 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
-import { PieChart } from "react-native-charts-wrapper";
-import * as services from "../../services";
-import NetworkExecutor from "../../NetworkExecutor";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -31,16 +28,16 @@ class Profile extends React.Component {
     this.logout = this.logout.bind(this);
   }
 
-  async logout() {
-    console.log("logout");
-    var result = await NetworkExecutor.get(services.LOGOUT);
-    this.props.navigation.pop();
-  }
+  // async logout() {
+  //   console.log("logout");
+  //   var result = await NetworkExecutor.get(services.LOGOUT);
+  //   this.props.navigation.pop();
+  // }
 
-  componentDidMount() {
-    this.props.navigation.setParams({ logout: this.logout });
-    this.loadProducts();
-  }
+  // componentDidMount() {
+  //   this.props.navigation.setParams({ logout: this.logout });
+  //   this.loadProducts();
+  // }
 
   render() {
     var user = this.state.user;
@@ -51,4 +48,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Home;
+export default Profile;

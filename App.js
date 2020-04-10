@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { StackNavigator } from "react-navigation";
+// import { StackNavigator } from "react-navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import 'react-native-gesture-handler';
 import Home from "./app/home/Home";
 import Login from "./app/login/Login";
 import Cadastro from "./app/login/Cadastro";
@@ -52,27 +52,27 @@ export default function App() {
         />
         <Stack.Screen
           name="Login"
-          component={Login}
+          component={LoginScreen}
           options={{ title: "Login" }}
         />
         <Stack.Screen
           name="Panel"
-          component={Panel}
+          component={PanelScreen}
           options={{ title: "Painel" }}
         />
         <Stack.Screen
           name="Extrato"
-          component={Extrato}
+          component={ExtratoScreen}
           options={{ title: "Extrato" }}
         />
         <Stack.Screen
           name="Members"
-          component={Members}
+          component={MembersScreen}
           options={{ title: "Membros" }}
         />
         <Stack.Screen
           name="Profile"
-          component={Profile}
+          component={ProfileScreen}
           options={{ title: "Perfil" }}
         />
       </Stack.Navigator>
