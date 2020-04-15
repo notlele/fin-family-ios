@@ -18,6 +18,8 @@ import {
   Dimensions,
   StyleSheet,
 } from "react-native";
+//import styles from "../resources/styles/homeStyles.scss";
+import navigation from "@react-navigation/native";
 
 class Home extends React.Component {
   constructor(props) {
@@ -48,11 +50,14 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    background:
-      "url('././resources/images/bgHome.png') center / cover borderBox",
+    backgroundImage: "url('../resources/images/bgHome.png')",
+    backgroundPosition: "center",
+    backgroundClip: "borderBox",
+    backgroundSize: "cover",
     alignItems: "center",
     justifyContent: "center",
     fontFamily: "Roboto",
+    textAlign: "center",
   },
   title: {
     fontSize: "50px",
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
     color: "linearGradient(hsl(127,72,65))",
   },
   Button: {
-    boxSizing: "borderBox",
+    boxSizing: "border-Box",
     border: "1px solid #3ED4AF",
     borderRadius: "20px",
     margin: "20px",

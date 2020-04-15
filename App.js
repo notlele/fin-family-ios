@@ -56,6 +56,11 @@ export default function App() {
           options={{ title: "Login" }}
         />
         <Stack.Screen
+          name="Cadastro"
+          component={CadastroScreen}
+          options={{ title: "Cadastro" }}
+        />
+        <Stack.Screen
           name="Panel"
           component={PanelScreen}
           options={{ title: "Painel" }}
