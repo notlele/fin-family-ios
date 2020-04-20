@@ -32,16 +32,18 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>FinFamily</Text>
-        <Button
-          style={styles.button1}
-          onPress={() => navigation.navigate("Cadastro")}
-          title="Create Account"
-        />
-        <Button
-          style={styles.button2}
-          onPress={() => navigation.navigate("Login")}
-          title="Login"
-        />
+        <View style={styles.buttons}>
+          <Button
+            style={styles.button1}
+            onPress={() => navigation.navigate("Cadastro")}
+            title="Create Account"
+          />
+          <Button
+            style={styles.button2}
+            onPress={() => navigation.navigate("Login")}
+            title="Login"
+          />
+        </View>
       </View>
     );
   }
@@ -50,10 +52,7 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundImage: "url('../resources/images/bgHome.png')",
-    backgroundPosition: "center",
-    backgroundClip: "borderBox",
-    backgroundSize: "cover",
+    backgroundColor: "linear-Gradient(hsl(127,72,65))",
     alignItems: "center",
     justifyContent: "center",
     fontFamily: "Roboto",
@@ -62,17 +61,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: "50px",
     position: "absolute",
-    top: "50%",
+    top: "20%",
     width: "100%",
-    color: "linearGradient(hsl(127,72,65))",
   },
-  Button: {
-    boxSizing: "border-Box",
-    border: "1px solid #3ED4AF",
-    borderRadius: "20px",
-    margin: "20px",
+  buttons: {
+    width: "90%",
+    alignContent: "space-around",
+    position: "relative",
+    top: "40%",
+    justifyContent: "space-between",
     fontSize: "20px",
     fontWeight: "900",
+    boxSizing: "border-Box",
+    borderSize: "1px",
+    borderStyle: "solid",
+    borderColor: "#3ED4AF",
+    borderRadius: "20px",
+    margin: "20px",
   },
   button1: {
     backgroundColor: "#65E674",

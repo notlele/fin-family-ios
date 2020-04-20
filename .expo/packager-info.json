@@ -1,10 +1,10 @@
 {
   "webpackServerPort": 19006,
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://67-u4j.anonymous.fin-family-ios.exp.direct",
+  "packagerNgrokUrl": "https://packager.67-u4j.anonymous.fin-family-ios.exp.direct",
+  "ngrokPid": 4704,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19001,
+  "packagerPid": 8048
 }
