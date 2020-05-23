@@ -1,1 +1,3 @@
-# fin-familly-ios
+# fin-family-ios
+
+expenses tracker
