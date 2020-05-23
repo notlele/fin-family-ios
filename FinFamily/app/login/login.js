@@ -8,7 +8,7 @@ import {
 	// ScrollView,
 	// Icon,
 	// Image,
-	// TextInput,
+	TextInput,
 	// TouchableOpacity,
 	// StatusBar,
 	// TouchableNativeFeedback,
@@ -40,6 +40,34 @@ class Login extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		axios.defaults.headers.get['Content-Type'] =
+			'application/json;charset=utf-8';
+		axios
+			.get('http://35.237.149.227/login/', login)
+			.then((res) => {
+				const cookies = new Cookies();
+				cookies.set('email', res.data.email, { path: '/' });
+				cookies.set('senha', res.data.senha, { path: '/' });
+				console.log(cookies.get('email'));
+				return navigation.navigate('Panel');
+			})
+			.catch((error) => {
+				const wrongPw = () =>
+					Alert.alert(
+						'Wrong Login',
+						'Check your e-mail and password!',
+						[{ text: 'OK' }],
+						{
+							cancelable: false,
+						}
+					);
+				if (error.response.status === 500) {
+					alert('Dados inválidos!');
+				} else if (error.response.status === 404) {
+					alert('Usuário não encontrado!');
+				}
+				return <Button title={'Wrong Login'} onPress={wrongPw} />;
+			});
 	}
 
 	render() {
@@ -47,25 +75,20 @@ class Login extends React.Component {
 			<View style={styles.container}>
 				<Text style={styles.title}>FinFamily</Text>
 				<form onSubmit={this.handleSubmit}>
-					<label>
-						E-mail:
-						<input
-							style={styles.input}
-							type='email'
-							value={this.state.email}
-							onChange={this.handleChange}
-						/>
-					</label>
-					<label>
-						Password:
-						<input
-							style={styles.input}
-							type='password'
-							value={this.state.senha}
-							onChange={this.handleChange}
-						/>
-					</label>
-					<input style={styles.button} type='submit' value='Login' />
+					<TextInput
+						style={styles.input}
+						keyboardType='email-address'
+						textContentType='emailAddress'
+						value='E-Mail'
+						onEndEditing={this.handleChange(any, email)}
+					/>
+					<TextInput
+						style={styles.input}
+						type='password'
+						value='Password'
+						onEndEditing={this.handleChange(any, senha)}
+					/>
+					<Button style={styles.buttonRound} type='submit' value='Login' />
 				</form>
 				<Button
 					style={styles.buttonHelp}
