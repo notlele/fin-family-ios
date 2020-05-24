@@ -4,11 +4,11 @@ import {
 	Text,
 	View,
 	Button,
-	StyleSheet,
+	TextInput,
+	// StyleSheet,
 	// ScrollView,
 	// Icon,
 	// Image,
-	TextInput,
 	// TouchableOpacity,
 	// StatusBar,
 	// TouchableNativeFeedback,
@@ -18,8 +18,12 @@ import {
 	// ActivityIndicator,
 	// Dimensions,
 } from 'react-native';
+import styles from './styles';
 import navigation from '@react-navigation/native';
-//import styles from "../resources/styles/LoginStyles.scss";
+
+function handlePress(pageName) {
+	navigation.navigate(pageName);
+}
 
 class Login extends React.Component {
 	constructor(props) {
@@ -49,7 +53,7 @@ class Login extends React.Component {
 				cookies.set('email', res.data.email, { path: '/' });
 				cookies.set('senha', res.data.senha, { path: '/' });
 				console.log(cookies.get('email'));
-				return navigation.navigate('Panel');
+				return handlePress('Panel');
 			})
 			.catch((error) => {
 				const wrongPw = () =>
@@ -92,46 +96,12 @@ class Login extends React.Component {
 				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={() => navigation.navigate('Cadastro')}
+					onPress={() => handlePress('Cadastro')}
 					title='Need Help?'
 				/>
 			</View>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: 'linear-Gradient(hsl(127,72,65))',
-		alignItems: 'center',
-		justifyContent: 'center',
-		fontFamily: 'Roboto',
-		textAlign: 'center',
-	},
-	title: {
-		fontSize: '50px',
-		position: 'absolute',
-		top: '20%',
-		width: '100%',
-	},
-	input: {},
-	button: {
-		width: '90%',
-		alignContent: 'space-around',
-		position: 'relative',
-		top: '40%',
-		justifyContent: 'space-between',
-		fontSize: '20px',
-		fontWeight: '900',
-		boxSizing: 'border-Box',
-		borderSize: '1px',
-		borderStyle: 'solid',
-		borderColor: '#3ED4AF',
-		borderRadius: '20px',
-		margin: '20px',
-	},
-	buttonHelp: {},
-});
 
 export default Login;

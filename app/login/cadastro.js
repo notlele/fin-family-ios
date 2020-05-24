@@ -4,11 +4,11 @@ import {
 	Text,
 	View,
 	Button,
-	StyleSheet,
+	TextInput,
+	// StyleSheet,
 	// ScrollView,
 	// Icon,
 	// Image,
-	TextInput,
 	// TouchableOpacity,
 	// StatusBar,
 	// TouchableNativeFeedback,
@@ -18,8 +18,16 @@ import {
 	// ActivityIndicator,
 	// Dimensions,
 } from 'react-native';
-//import styles from "../resources/styles/CadastroStyles.scss";
+import styles from './styles';
 import navigation from '@react-navigation/native';
+
+function handlePress(pageName) {
+	navigation.navigate(pageName);
+}
+
+function handleChange(event, t) {
+	this.setState({ value: event.target.t });
+}
 
 class Cadastro extends React.Component {
 	constructor(props) {
@@ -34,17 +42,11 @@ class Cadastro extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(event) {
-		this.setState({ value: event.target.nome });
-		this.setState({ value: event.target.cpf });
-		this.setState({ value: event.target.nasc });
-	}
-
 	handleSubmit(event) {
 		event.preventDefault();
 		// check cpf before next screen
 		if (cpfOK) {
-			return navigation.navigate('Cadastro2');
+			return handlePress('Cadastro2');
 		} else {
 			const wrongPw = () =>
 				Alert.alert('CPF Inválido', 'Verifique seu CPF.', [{ text: 'OK' }], {
@@ -82,7 +84,7 @@ class Cadastro extends React.Component {
 
 				<Button
 					style={styles.buttonHelp}
-					onPress={() => navigation.navigate('')}
+					onPress={handlePress('')}
 					title='Need Help?'
 				/>
 			</View>
@@ -95,22 +97,18 @@ class Cadastro2 extends React.Component {
 		super(props);
 		this.state = {
 			email: '',
-			senha: '',
-			senha2: '',
+			password: '',
+			password2: '',
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(event, t) {
-		this.setState({ value: event.target.t });
-	}
-
 	handleSubmit(event) {
 		event.preventDefault();
-		if (senha === senha2) {
-			return navigation.navigate('Cadastro3');
+		if (password === password2) {
+			return handlePress('Cadastro3');
 		} else {
 			const wrongPw = () =>
 				Alert.alert(
@@ -141,19 +139,19 @@ class Cadastro2 extends React.Component {
 						style={styles.input}
 						type='password'
 						value='Password'
-						onEndEditing={this.handleChange(any, senha)}
+						onEndEditing={this.handleChange(any, password)}
 					/>
 					<TextInput
 						style={styles.input}
 						textContentType='password'
 						value='Confirm password'
-						onEndEditing={this.handleChange(any, senha2)}
+						onEndEditing={this.handleChange(any, password2)}
 					/>
 					<Button style={styles.buttonRound} type='submit' value='Next' />
 				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={() => navigation.navigate('')}
+					onPress={handlePress('')}
 					title='Need Help?'
 				/>
 			</View>
@@ -165,24 +163,18 @@ class Cadastro3 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			nome: Cadastro.nome,
+			full_name: Cadastro.nome,
 			cpf: Cadastro.cpf,
-			nasc: Cadastro.nasc,
+			birthday: Cadastro.nasc,
 			email: Cadastro2.email,
-			senha: Cadastro2.senha,
+			password: Cadastro2.password,
 			nickname: '',
-			ddd: '',
+			phone_area_code: '',
 			phone: '',
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChange(event) {
-		// this.setState({ value: event.target.email });
-		// this.setState({ value: event.target.senha });
-		// this.setState({ value: event.target.senha2 });
 	}
 
 	handleSubmit(event) {
@@ -193,18 +185,18 @@ class Cadastro3 extends React.Component {
 			.post('http://35.237.149.227/cadastro/', Cadastro3)
 			.then((res) => {
 				const cookies = new Cookies();
-				cookies.set('nome', res.data.nome, { path: '/' });
+				cookies.set('full_name', res.data.nome, { path: '/' });
 				cookies.set('cpf', res.data.cpf, { path: '/' });
-				cookies.set('nasc', res.data.nasc, { path: '/' });
+				cookies.set('birthday', res.data.nasc, { path: '/' });
 				cookies.set('email', res.data.email, { path: '/' });
-				cookies.set('senha', res.data.senha, { path: '/' });
+				cookies.set('password', res.data.password, { path: '/' });
 				cookies.set('nickname', res.data.nickname, { path: '/' });
-				cookies.set('ddd', res.data.ddd, { path: '/' });
 				cookies.set('phone', res.data.phone, { path: '/' });
+				cookies.set('phone_area_code', res.data.phone_area_code, {
+					path: '/',
+				});
 
-				console.log(cookies.get('nickname'));
-
-				return navigation.navigate('Panel');
+				return handlePress('Login');
 			})
 			.catch((error) => {
 				const wrongPw = () =>
@@ -218,9 +210,9 @@ class Cadastro3 extends React.Component {
 						}
 					);
 				if (error.response.status === 500) {
-					// alert('Dados inválidos!');
+					console.log('Dados inválidos!');
 				} else if (error.response.status === 404) {
-					// alert('Usuário não encontrado!');
+					console.log('Usuário não encontrado!');
 				}
 				return <Button title={'Wrong Login'} onPress={wrongPw} />;
 			});
@@ -230,49 +222,21 @@ class Cadastro3 extends React.Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>FinFamily</Text>
-				<form onSubmit={this.handleSubmit}></form>
+				<form onSubmit={this.handleSubmit}>
+					<Button
+						style={styles.buttonRound}
+						type='submit'
+						value='Create Account'
+					/>
+				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={() => navigation.navigate('')}
+					onPress={handlePress('')}
 					title='Need Help?'
 				/>
 			</View>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: 'linear-Gradient(hsl(127,72,65))',
-		alignItems: 'center',
-		justifyContent: 'center',
-		fontFamily: 'Roboto',
-		textAlign: 'center',
-	},
-	title: {
-		fontSize: '50px',
-		position: 'absolute',
-		top: '20%',
-		width: '100%',
-	},
-	input: {},
-	button: {
-		width: '90%',
-		alignContent: 'space-around',
-		position: 'relative',
-		top: '40%',
-		justifyContent: 'space-between',
-		fontSize: '20px',
-		fontWeight: '900',
-		boxSizing: 'border-Box',
-		borderSize: '1px',
-		borderStyle: 'solid',
-		borderColor: '#3ED4AF',
-		borderRadius: '20px',
-		margin: '20px',
-	},
-	buttonRound: {},
-});
 
 export default Cadastro;
