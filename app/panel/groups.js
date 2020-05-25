@@ -12,11 +12,7 @@ import {
 	// TouchableOpacity,
 	// StatusBar,
 	// TouchableNativeFeedback,
-	// TouchableHighlight,
 	// AsyncStorage,
-	// processColor,
-	// ActivityIndicator,
-	// Dimensions,
 } from 'react-native';
 import styles from './styles';
 import navigation from '@react-navigation/native';
