@@ -1,5 +1,4 @@
 import React from 'react';
-import Typeface from 'typeface-roboto';
 import {
 	Text,
 	View,
@@ -9,7 +8,6 @@ import {
 	// ScrollView,
 	// Icon,
 	// Image,
-	// TouchableOpacity,
 	// StatusBar,
 	// TouchableNativeFeedback,
 	// TouchableHighlight,
@@ -20,26 +18,26 @@ import {
 } from 'react-native';
 import styles from './styles';
 import navigation from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-function handlePress(pageName) {
-	navigation.navigate(pageName);
-}
-
-class Login extends React.Component {
+export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			email: '',
 			senha: '',
 		};
-
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(event) {
-		this.setState({ email: event.target.email });
-		this.setState({ senha: event.target.senha });
+	handlePress(pageName) {
+		navigation.navigate(pageName);
+	}
+
+	handleChange(event, t) {
+		eventTarget = t;
+		this.setState({ value: event.target.eventTarget });
 	}
 
 	handleSubmit(event) {
@@ -84,24 +82,26 @@ class Login extends React.Component {
 						keyboardType='email-address'
 						textContentType='emailAddress'
 						value='E-Mail'
-						onEndEditing={this.handleChange(any, email)}
+						onEndEditing={this.handleChange('', 'email')}
 					/>
 					<TextInput
 						style={styles.input}
 						type='password'
 						value='Password'
-						onEndEditing={this.handleChange(any, senha)}
+						onEndEditing={this.handleChange('', 'senha')}
 					/>
-					<Button style={styles.buttonRound} type='submit' value='Login' />
+					<TouchableOpacity
+						style={styles.buttonRound}
+						type='submit'
+						value='Login'
+					/>
 				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={() => handlePress('Cadastro')}
+					onPress={() => handlePress('')}
 					title='Need Help?'
 				/>
 			</View>
 		);
 	}
 }
-
-export default Login;

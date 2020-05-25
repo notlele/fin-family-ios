@@ -9,6 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import Home from './app/home/Home';
+import Login from './app/login/login';
+import Cadastro from './app/login/cadastro';
 import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
@@ -54,6 +56,8 @@ export default function App(props) {
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
           <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Cadastro" component={Cadastro} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

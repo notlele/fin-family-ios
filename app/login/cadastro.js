@@ -1,5 +1,4 @@
 import React from 'react';
-import Typeface from 'typeface-roboto';
 import {
 	Text,
 	View,
@@ -17,14 +16,6 @@ import {
 import styles from './styles';
 import navigation from '@react-navigation/native';
 
-function handlePress(pageName) {
-	navigation.navigate(pageName);
-}
-
-function handleChange(event, t) {
-	this.setState({ value: event.target.t });
-}
-
 class Cadastro extends React.Component {
 	constructor(props) {
 		super(props);
@@ -38,6 +29,13 @@ class Cadastro extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	handlePress(pageName) {
+		navigation.navigate(pageName);
+	}
+
+	handleChange(event, t) {
+		this.setState({ value: event.target.t });
+	}
 	handleSubmit(event) {
 		event.preventDefault();
 		// check cpf before next screen
