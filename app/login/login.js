@@ -19,6 +19,7 @@ import {
 import styles from './styles';
 import navigation from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -35,9 +36,8 @@ export default class Login extends React.Component {
 		navigation.navigate(pageName);
 	}
 
-	handleChange(event, t) {
-		eventTarget = t;
-		this.setState({ value: event.target.eventTarget });
+	handleChange(t) {
+		this.setState({ value: `event.target.${t}` });
 	}
 
 	handleSubmit(event) {
@@ -68,40 +68,54 @@ export default class Login extends React.Component {
 				} else if (error.response.status === 404) {
 					alert('Usuário não encontrado!');
 				}
-				return <Button title={'Wrong Login'} onPress={wrongPw} />;
+				return wrongPw;
 			});
 	}
 
 	render() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>FinFamily</Text>
-				<form onSubmit={this.handleSubmit}>
-					<TextInput
-						style={styles.input}
-						keyboardType='email-address'
-						textContentType='emailAddress'
-						value='E-Mail'
-						onEndEditing={this.handleChange('', 'email')}
-					/>
-					<TextInput
-						style={styles.input}
-						type='password'
-						value='Password'
-						onEndEditing={this.handleChange('', 'senha')}
-					/>
-					<TouchableOpacity
-						style={styles.buttonRound}
-						type='submit'
-						value='Login'
-					/>
-				</form>
-				<Button
-					style={styles.buttonHelp}
-					onPress={() => handlePress('')}
-					title='Need Help?'
-				/>
-			</View>
-		);
+		return <LoginScreen/>;
 	}
+}
+
+function LoginScreen({ navigation }) {
+	return (
+		<View style={styles.bg}>
+			<LinearGradient
+				colors={['rgba(52,202,154,0.8)', 'rgba(160,61,179,0.45)']}
+				start={[0.5, 0.5]}
+				end={[0.3, 1.0]}
+				style={{ flex: 1 }}>
+				<View style={styles.container}>
+					<Text style={styles.title}>FinFamily</Text>
+					<form onSubmit={this.handleSubmit}>
+						<TextInput
+							style={styles.input}
+							keyboardType='email-address'
+							textContentType='emailAddress'
+							value='E-Mail'
+							onEndEditing={this.handleChange('email')}
+						/>
+						<TextInput
+							style={styles.input}
+							type='password'
+							value='Password'
+							onEndEditing={this.handleChange('senha')}
+						/>
+						<View style={styles.button}>
+							<TouchableOpacity
+								color='#3ED4AF'
+								onPress={() => navigation.navigate('Login')}>
+								<Text style={styles.txt}>Login</Text>
+							</TouchableOpacity>
+						</View>
+					</form>
+					<Button
+						style={styles.buttonHelp}
+						onPress={() => handlePress('')}
+						title='Need Help?'
+					/>
+				</View>
+			</LinearGradient>
+		</View>
+	);
 }

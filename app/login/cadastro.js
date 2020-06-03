@@ -43,7 +43,7 @@ class Cadastro extends React.Component {
 			return handlePress('Cadastro2');
 		} else {
 			const wrongPw = () =>
-				Alert.alert('CPF Inválido', 'Verifique seu CPF.', [{ text: 'OK' }], {
+				Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
 					cancelable: false,
 				});
 			return <Button title={'2-Button Alert'} onPress={wrongPw} />;
@@ -106,8 +106,8 @@ class Cadastro2 extends React.Component {
 		} else {
 			const wrongPw = () =>
 				Alert.alert(
-					'Senhas não coincidem',
-					'Digite a senha novamente.',
+					'Passwords do not match',
+					'Type the password again.',
 					[{ text: 'OK' }],
 					{
 						cancelable: false,
@@ -195,10 +195,8 @@ class Cadastro3 extends React.Component {
 			.catch((error) => {
 				const wrongPw = () =>
 					Alert.alert(
-						'Erro',
-						'Não foi possivel realizar seu cadastro.\nTente novamente'[
-							{ text: 'OK' }
-						],
+						'Error',
+						'We couldn`t sign you up.\nPlease try again'[{ text: 'OK' }],
 						{
 							cancelable: false,
 						}
