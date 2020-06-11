@@ -9,9 +9,7 @@ import {
 	TouchableOpacity,
 	// StyleSheet,
 	// ScrollView,
-	// Icon,
 	// Image,
-	// StatusBar,
 	// TouchableNativeFeedback,
 	// AsyncStorage,
 } from 'react-native';
@@ -85,15 +83,14 @@ const newGroup = () => {
 						upload image
 					</Text>
 
-					<Icon
-						name='done'
-						type='material'
-						color='#000'
+					<TouchableOpacity
+						color='#3ED4AF'
 						onPress={() => {
 							setModalVisible(!modalVisible);
 							//this.handleSubmit;
-						}}
-					/>
+						}}>
+						<Icon name='done' type='material' color='#000' />
+					</TouchableOpacity>
 				</View>
 			</View>
 		</Modal>

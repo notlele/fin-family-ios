@@ -1,6 +1,9 @@
 # fin-family-ios
 expenses tracker
 
+### contribution tools
+- [notion](https://www.notion.so/puppycat/project-5c7e21e33f1c4916adb8d59ae92563ac)
+
 ### main dependencies:
 - expo
 - react-native

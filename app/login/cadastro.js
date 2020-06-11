@@ -4,13 +4,10 @@ import {
 	View,
 	Button,
 	TextInput,
+	TouchableOpacity,
+	Icon,
 	// StyleSheet,
 	// ScrollView,
-	// Icon,
-	// Image,
-	// TouchableOpacity,
-	// StatusBar,
-	// TouchableNativeFeedback,
 	// AsyncStorage
 } from 'react-native';
 import styles from './styles';
@@ -29,19 +26,19 @@ class Cadastro extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handlePress(pageName) {
-		navigation.navigate(pageName);
-	}
+	// handlePress(pageName) {
+	// 	navigation.navigate(pageName);
+	// }
 
 	handleChange(event, t) {
 		this.setState({ value: event.target.t });
 	}
-	
+
 	handleSubmit(event) {
 		event.preventDefault();
 		// check cpf before next screen
 		if (cpfOK) {
-			return handlePress('Cadastro2');
+			return navigation.navigate('Cadastro2');
 		} else {
 			const wrongPw = () =>
 				Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
@@ -79,7 +76,7 @@ class Cadastro extends React.Component {
 
 				<Button
 					style={styles.buttonHelp}
-					onPress={handlePress('')}
+					onPress={navigation.navigate('')}
 					title='Need Help?'
 				/>
 			</View>
@@ -103,7 +100,7 @@ class Cadastro2 extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		if (password === password2) {
-			return handlePress('Cadastro3');
+			return navigation.navigate('Cadastro3');
 		} else {
 			const wrongPw = () =>
 				Alert.alert(
@@ -146,7 +143,7 @@ class Cadastro2 extends React.Component {
 				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={handlePress('')}
+					onPress={navigation.navigate('')}
 					title='Need Help?'
 				/>
 			</View>
@@ -191,7 +188,7 @@ class Cadastro3 extends React.Component {
 					path: '/',
 				});
 
-				return handlePress('Login');
+				return navigation.navigate('Login');
 			})
 			.catch((error) => {
 				const wrongPw = () =>
@@ -224,7 +221,7 @@ class Cadastro3 extends React.Component {
 				</form>
 				<Button
 					style={styles.buttonHelp}
-					onPress={handlePress('')}
+					onPress={navigation.navigate('')}
 					title='Need Help?'
 				/>
 			</View>
