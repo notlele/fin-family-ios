@@ -1,6 +1,5 @@
 # fin-family-ios
-
-## expenses tracker
+expenses tracker
 
 ### main dependencies:
 - expo
