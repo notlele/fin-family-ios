@@ -36,6 +36,7 @@ class Cadastro extends React.Component {
 	handleChange(event, t) {
 		this.setState({ value: event.target.t });
 	}
+	
 	handleSubmit(event) {
 		event.preventDefault();
 		// check cpf before next screen
