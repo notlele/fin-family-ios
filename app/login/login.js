@@ -11,10 +11,6 @@ import {
 	// StatusBar,
 	// TouchableNativeFeedback,
 	// TouchableHighlight,
-	// AsyncStorage,
-	// processColor,
-	// ActivityIndicator,
-	// Dimensions,
 } from 'react-native';
 import styles from './styles';
 import navigation from '@react-navigation/native';
@@ -28,7 +24,9 @@ export default class Login extends React.Component {
 			email: '',
 			senha: '',
 		};
-		this.handleChange = this.handleChange.bind(this);
+
+		this.handleChangeEmail = this.handleChangeEmail.bind(this);
+		this.handleChangePassword = this.handleChangePassword.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -36,8 +34,12 @@ export default class Login extends React.Component {
 		navigation.navigate(pageName);
 	}
 
-	handleChange(t) {
-		this.setState({ value: `event.target.${t}` });
+	handleChangeEmail(event) {
+		this.setState({ email: event.target.value });
+	}
+
+	handleChangePassword(event) {
+		this.setState({ senha: event.target.value });
 	}
 
 	handleSubmit(event) {
@@ -73,7 +75,7 @@ export default class Login extends React.Component {
 	}
 
 	render() {
-		return <LoginScreen/>;
+		return <LoginScreen />;
 	}
 }
 
@@ -92,19 +94,18 @@ function LoginScreen({ navigation }) {
 							style={styles.input}
 							keyboardType='email-address'
 							textContentType='emailAddress'
-							value='E-Mail'
-							onEndEditing={this.handleChange('email')}
+							placeholder='E-Mail'
+							onChange={this.handleChangeEmail}
 						/>
 						<TextInput
 							style={styles.input}
 							type='password'
-							value='Password'
-							onEndEditing={this.handleChange('senha')}
+							secureTextEntry={true}
+							placeholder='Password'
+							onChange={this.handleChangePassword}
 						/>
 						<View style={styles.button}>
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={() => navigation.navigate('Login')}>
+							<TouchableOpacity color='#3ED4AF' onPress={this.handleSubmit}>
 								<Text style={styles.txt}>Login</Text>
 							</TouchableOpacity>
 						</View>

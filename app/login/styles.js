@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	title: {
-		fontSize: '50px',
+		fontSize: 50,
 		position: 'absolute',
 		top: '20%',
 		width: '100%',
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
 		position: 'relative',
 		top: '30%',
 		justifyContent: 'space-between',
-		boxSizing: 'border-Box',
 	},
 	button1: {
 		margin: 8,
@@ -44,8 +43,8 @@ const styles = StyleSheet.create({
 		borderStyle: 'solid',
 	},
 	txt: {
-		fontSize: '20px',
-		fontWeight: '750',
+		fontSize: 20,
+		fontWeight: '700',
 	},
 });
 
