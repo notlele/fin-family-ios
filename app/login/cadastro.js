@@ -9,13 +9,13 @@ import {
 	// ScrollView,
 	// AsyncStorage
 } from 'react-native';
+import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextInputMask } from 'react-native-masked-text';
-import navigation from '@react-navigation/native';
-import styles from './styles';
+import { navigation, useNavigation } from '@react-navigation/native';
 
-class Cadastro extends React.Component {
+class Cadastro1 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -25,23 +25,20 @@ class Cadastro extends React.Component {
 		};
 
 		this.handleChangeNome = this.handleChangeNome.bind(this);
-		this.handleChangeCpf = this.handleChangeIdade.bind(this);
-		this.handleChangeNasc = this.handleChangeIdade.bind(this);
+		this.handleChangeCpf = this.handleChangeCpf.bind(this);
+		this.handleChangeNasc = this.handleChangeNasc.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleChangeNome(event) {
-		console.log(event.target.value);
 		this.setState({ nome: event.target.value });
 	}
 
 	handleChangeCpf(event) {
-		console.log(event.target.value);
 		this.setState({ cpf: event.target.value });
 	}
 
 	handleChangeNasc(event) {
-		console.log(event.target.value);
 		this.setState({ nasc: event.target.value });
 	}
 
@@ -50,35 +47,40 @@ class Cadastro extends React.Component {
 	// }
 
 	handleSubmit(event) {
-		event.preventDefault();
+		// event.preventDefault();
 		// check cpf before next screen
-		const cpfIsValid = this.cpfField.isValid();
-		const unmasked = this.cpfField.getRawValue();
-		const dobIsValid = this.datetimeField.isValid();
+		// const cpfIsValid = this.cpfField.isValid();
+		// const unmasked = this.cpfField.getRawValue();
+		// const dobIsValid = this.datetimeField.isValid();
 
-		if (cpfIsValid && dobIsValid) {
-			return navigation.navigate('Cadastro2');
-		} else if (!cpfIsValid) {
-			const wrongPw = () =>
-				Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
-					cancelable: false,
-				});
-			return <Button title={'2-Button Alert'} onPress={wrongPw} />;
-		} else if (!dobIsValid) {
-			const wrongPw = () =>
-				Alert.alert(
-					'Invalid date input',
-					'Check your birth date.',
-					[{ text: 'OK' }],
-					{
-						cancelable: false,
-					}
-				);
-			return <Button title={'2-Button Alert'} onPress={wrongPw} />;
-		}
+		// if (cpfIsValid && dobIsValid) {
+		return () => {
+			navigation.navigate('Cadastro2', {
+				full_name: this.nome,
+				cpf: this.cpf,
+				birthday: this.dt,
+			});
+		};
+		// } else if (!cpfIsValid) {
+		// 	return () =>
+		// 		Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
+		// 			cancelable: false,
+		// 		});
+		// } else if (!dobIsValid) {
+		// 	return () =>
+		// 		Alert.alert(
+		// 			'Invalid date input',
+		// 			'Check your birth date.',
+		// 			[{ text: 'OK' }],
+		// 			{
+		// 				cancelable: false,
+		// 			}
+		// 		);
+		// }
 	}
 
 	render() {
+		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -89,31 +91,33 @@ class Cadastro extends React.Component {
 					<View style={styles.container}>
 						<Text style={styles.titleCreate}>Create Account</Text>
 						<Text style={styles.subtitle}>Personal Information</Text>
-						<form onSubmit={this.handleSubmit}>
+						<form style={styles.form}>
 							<TextInput
 								style={styles.input}
 								placeholder='Name'
 								value={this.state.nome}
-								// onChangeText={(text) => {
-								// 	this.setState({
-								// 		nome: text,
-								// 	});
-								// }}
-								onChange={this.handleChangeNome}
+								onChangeText={(text) => {
+									this.handleChangeNome;
+									this.setState({
+										nome: text,
+									});
+								}}
 							/>
 							<TextInputMask
 								style={styles.input}
 								type={'cpf'}
 								value={this.state.cpf}
-								// onChangeText={(text) => {
-								// 	this.setState({
-								// 		cpf: text,
-								// 	});
-								// }}
+								includeRawValueInChangeText={true}
+								onChangeText={(text) => {
+									this.handleChangeCpf;
+									this.setState({
+										cpf: text,
+									});
+								}}
 								// add the ref to a local var
 								ref={(ref) => (this.cpfField = ref)}
 								placeholder='CPF'
-								onChange={this.handleChangeCpf}
+								// maxLength={14}
 							/>
 							<TextInputMask
 								style={styles.input}
@@ -122,32 +126,33 @@ class Cadastro extends React.Component {
 									format: 'DD/MM/YYYY',
 								}}
 								value={this.state.dt}
-								// onChangeText={(text) => {
-								// 	this.setState({
-								// 		dt: text,
-								// 	});
-								// }}
+								onChangeText={(text) => {
+									this.handleChangeNasc;
+									this.setState({
+										dt: text,
+									});
+								}}
 								refInput={(ref) => {
 									this.input = ref;
 								}}
 								placeholder='Date of Birth'
-								onChange={this.handleChangeNasc}
+								// maxLength={8}
 							/>
-							<View style={styles.buttonRound}>
+							<View style={styles.buttonForm}>
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
-									onPress={() => navigation.navigate('Cadastro2')}>
+									onPress={this.handleSubmit}>
 									<Text style={styles.txt}>Next</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
 
-						<Button
-							style={styles.buttonHelp}
-							// onPress={navigation.navigate('')}
-							title='Need Help?'
-						/>
+						<View style={styles.buttonHelp}>
+							<TouchableOpacity color='#3ED4AF' type='submit'>
+								<Text style={styles.buttonHelp}>Need Help?</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</LinearGradient>
 			</View>
@@ -159,38 +164,46 @@ class Cadastro2 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			full_name: Cadastro1.nome,
+			cpf: Cadastro1.cpf, // unmasked, // uses the getRawValue
+			birthday: Cadastro1.nasc,
 			email: '',
 			password: '',
 			password2: '',
 		};
 
-		this.handleChangeEmail = this.handleChangeNome.bind(this);
-		this.handleChangePassword = this.handleChangeIdade.bind(this);
-		this.handleChangePassword2 = this.handleChangeIdade.bind(this);
+		this.handleChangeEmail = this.handleChangeEmail.bind(this);
+		this.handleChangePassword = this.handleChangePassword.bind(this);
+		this.handleChangePassword2 = this.handleChangePassword2.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleChangeEmail(event) {
-		console.log(event.target.value);
 		this.setState({ email: event.target.value });
 	}
 
 	handleChangePassword(event) {
-		console.log(event.target.value);
 		this.setState({ password: event.target.value });
 	}
 
 	handleChangePassword2(event) {
-		console.log(event.target.value);
 		this.setState({ password2: event.target.value });
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
 		if (password === password2) {
-			return navigation.navigate('Cadastro3');
+			return () => {
+				navigation.navigate('Cadastro3', {
+					full_name: this.full_name,
+					cpf: this.cpf,
+					birthday: this.birthday,
+					email: this.email,
+					password: this.password,
+				});
+			};
 		} else {
-			const wrongPw = () =>
+			return () =>
 				Alert.alert(
 					'Passwords do not match',
 					'Type the password again.',
@@ -199,11 +212,11 @@ class Cadastro2 extends React.Component {
 						cancelable: false,
 					}
 				);
-			return <Button title={'2-Button Alert'} onPress={wrongPw} />;
 		}
 	}
 
 	render() {
+		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -220,36 +233,55 @@ class Cadastro2 extends React.Component {
 								keyboardType='email-address'
 								textContentType='emailAddress'
 								placeholder='E-Mail for access'
-								onChange={this.handleChangeEmail}
+								value={this.state.email}
+								onChangeText={(text) => {
+									this.handleChangeEmail;
+									this.setState({
+										email: text,
+									});
+								}}
 							/>
 							<TextInput
 								style={styles.input}
 								type='password'
 								secureTextEntry={true}
 								placeholder='Password'
-								onChange={this.handleChangePassword}
+								value={this.state.password}
+								onChangeText={(text) => {
+									this.handleChangePassword;
+									this.setState({
+										password: text,
+									});
+								}}
 							/>
 							<TextInput
 								style={styles.input}
 								type='password'
 								secureTextEntry={true}
 								placeholder='Confirm password'
-								onChange={this.handleChangePassword2}
+								value={this.state.password2}
+								onChangeText={(text) => {
+									this.handleChangePassword2;
+									this.setState({
+										password2: text,
+									});
+								}}
 							/>
-							<View style={styles.buttonRound}>
+							<View style={styles.buttonForm}>
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
-									onPress={() => navigation.navigate('Cadastro3')}>
+									onPress={this.handleSubmit}>
 									<Text style={styles.txt}>Next</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
-						<Button
-							style={styles.buttonHelp}
-							onPress={navigation.navigate('')}
-							title='Need Help?'
-						/>
+
+						<View style={styles.buttonHelp}>
+							<TouchableOpacity color='#3ED4AF' type='submit'>
+								<Text style={styles.buttonHelp}>Need Help?</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</LinearGradient>
 			</View>
@@ -261,9 +293,9 @@ class Cadastro3 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			full_name: Cadastro.nome,
-			cpf: Cadastro.cpf, // unmasked, // uses the getRawValue
-			birthday: Cadastro.nasc,
+			full_name: Cadastro1.nome,
+			cpf: Cadastro1.cpf, // unmasked, // uses the getRawValue
+			birthday: Cadastro1.nasc,
 			email: Cadastro2.email,
 			password: Cadastro2.password,
 			nickname: '',
@@ -278,17 +310,14 @@ class Cadastro3 extends React.Component {
 	}
 
 	handleChangeNickname(event) {
-		console.log(event.target.value);
 		this.setState({ nickname: event.target.value });
 	}
 
 	handleChangeCode(event) {
-		console.log(event.target.value);
 		this.setState({ phone_area_code: event.target.value });
 	}
 
 	handleChangePhone(event) {
-		console.log(event.target.value);
 		this.setState({ phone: event.target.value });
 	}
 
@@ -300,9 +329,9 @@ class Cadastro3 extends React.Component {
 			.post('http://35.237.149.227/cadastro/', Cadastro3)
 			.then((res) => {
 				const cookies = new Cookies();
-				cookies.set('full_name', res.data.nome, { path: '/' });
+				cookies.set('full_name', res.data.full_name, { path: '/' });
 				cookies.set('cpf', res.data.cpf, { path: '/' });
-				cookies.set('birthday', res.data.nasc, { path: '/' });
+				cookies.set('birthday', res.data.birthday, { path: '/' });
 				cookies.set('email', res.data.email, { path: '/' });
 				cookies.set('password', res.data.password, { path: '/' });
 				cookies.set('nickname', res.data.nickname, { path: '/' });
@@ -332,6 +361,7 @@ class Cadastro3 extends React.Component {
 	}
 
 	render() {
+		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -347,7 +377,13 @@ class Cadastro3 extends React.Component {
 								style={styles.input}
 								type='text'
 								placeholder='Nickname'
-								onChange={this.handleChangeNickname}
+								value={this.state.nickname}
+								onChangeText={(text) => {
+									this.handleChangeNickname;
+									this.setState({
+										nickname: text,
+									});
+								}}
 							/>
 							<View style={styles.phoneNumber}>
 								<TextInputMask
@@ -355,16 +391,15 @@ class Cadastro3 extends React.Component {
 									options={{
 										mask: '(99)',
 									}}
-									// value={this.state.ddd}
-									// onChangeText={(text) => {
-									// 	this.setState({
-									// 		ddd: text,
-									// 	});
-									// }}
+									onChangeText={(text) => {
+										this.handleChangeCode;
+										this.setState({
+											ddd: text,
+										});
+									}}
 									style={styles.inputSmall}
 									textContentType='number'
 									placeholder='(__)'
-									onChange={this.handleChangeCode}
 								/>
 								<TextInputMask
 									type={'cel-phone'}
@@ -372,34 +407,34 @@ class Cadastro3 extends React.Component {
 										maskType: 'BRL',
 										withDDD: false,
 									}}
-									// value={this.state.phone}
-									// onChangeText={(text) => {
-									// 	this.setState({
-									// 		phone: text,
-									// 	});
-									// }}
+									onChangeText={(text) => {
+										this.handleChangePhone;
+										this.setState({
+											phone: text,
+										});
+									}}
 									// add the ref to a local var
-									// ref={(ref) => (this.phoneField = ref)}
+									ref={(ref) => (this.phoneField = ref)}
 									textContentType='number'
 									placeholder='_____-____'
 									style={styles.inputMedium}
-									onChange={this.handleChangePhone}
 								/>
 							</View>
-							<View style={styles.buttonRound}>
+							<View style={styles.buttonForm}>
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
 									onPress={this.handleSubmit}>
-									<Text style={styles.txt}>Create Account</Text>
+									<Text style={styles.txt}>Next</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
-						<Button
-							style={styles.buttonHelp}
-							onPress={navigation.navigate('')}
-							title='Need Help?'
-						/>
+
+						<View style={styles.buttonHelp}>
+							<TouchableOpacity color='#3ED4AF' type='submit'>
+								<Text style={styles.buttonHelp}>Need Help?</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</LinearGradient>
 			</View>
@@ -407,4 +442,9 @@ class Cadastro3 extends React.Component {
 	}
 }
 
-export default Cadastro;
+// Wrap and export
+export default function Cadastro(props) {
+	const navigation = useNavigation();
+
+	return <Cadastro1 {...props} navigation={navigation} />;
+}
