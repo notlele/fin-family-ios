@@ -6,8 +6,10 @@ expenses tracker
 
 ### main dependencies:
 - expo
+  - expo-linear-gradient
 - react-native
   - react-native-elements
   - react-native-gesture-handler
   - react-native-image-picker
   - react-navigation
+  - react-native-masked-text
