@@ -9,7 +9,7 @@ import {
 	// ScrollView,
 	// AsyncStorage
 } from 'react-native';
-import styles from './styles';
+import styles from '../constants/loginStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextInputMask } from 'react-native-masked-text';

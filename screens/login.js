@@ -11,7 +11,7 @@ import {
 	// TouchableNativeFeedback,
 	// TouchableHighlight,
 } from 'react-native';
-import styles from './styles';
+import styles from '../constants/loginStyles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { navigation, useNavigation } from '@react-navigation/native';

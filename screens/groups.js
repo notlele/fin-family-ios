@@ -12,7 +12,7 @@ import {
 	// TouchableNativeFeedback,
 	// AsyncStorage,
 } from 'react-native';
-import styles from './styles';
+import styles from '../constants/panelStyles';
 import navigation from '@react-navigation/native';
 // import ImagePicker from 'react-native-image-picker';
 import { Header, Icon } from 'react-native-elements';

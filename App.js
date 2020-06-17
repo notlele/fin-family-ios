@@ -4,14 +4,14 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import useLinking from './navigation/useLinking';
-import Home from './app/home/home';
-import Login from './app/login/login';
-import Cadastro1 from './app/login/cadastro';
-import Groups from './app/panel/groups';
-import Panel from './app/panel/panel';
-import Extrato from './app/panel/extrato';
-import Members from './app/panel/members';
-import Profile from './app/profile/profile';
+import Home from './screens/home';
+import Login from './screens/login';
+import Cadastro1 from './screens/cadastro';
+import Groups from './screens/groups';
+import Panel from './screens/panel';
+import Extrato from './screens/extrato';
+import Members from './screens/members';
+import Profile from './screens/profile';
 
 const Stack = createStackNavigator();
 

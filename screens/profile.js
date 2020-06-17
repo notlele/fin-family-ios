@@ -16,6 +16,7 @@
 //   ActivityIndicator,
 //   Dimensions,
 // } from "react-native";
+// import styles from '../constants/profileStyles';
 
 // class Profile extends React.Component {
 //   constructor(props) {

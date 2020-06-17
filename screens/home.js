@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import styles from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import navigation from '@react-navigation/native';
+import styles from '../constants/homeStyles';
 
 export default function Home({ navigation }) {
 	return (
