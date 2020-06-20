@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		fontFamily: 'Roboto',
+		// fontFamily: 'Roboto',
 		textAlign: 'center',
 	},
 	title: {
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
 		margin: 10,
 		marginLeft: '10%',
 		backgroundColor: 'none',
-		alignSelf: 'right',
 		fontSize: 14,
 		fontWeight: 'light',
 		color: 'white',

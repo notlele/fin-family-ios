@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getData = (path, data) => {
+export const getData = (path, json) => {
 	const [data, setData] = useState(['']);
 	axios.defaults.headers.post['Content-Type'] =
 		'application/json;charset=utf-8';

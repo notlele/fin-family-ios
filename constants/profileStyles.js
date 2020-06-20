@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		fontFamily: 'Roboto',
+		// fontFamily: 'Roboto',
 		textAlign: 'center',
 	},
 	title: {

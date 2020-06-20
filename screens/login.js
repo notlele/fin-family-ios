@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TextInput } from 'react-native';
 import styles from '../constants/loginStyles';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -13,10 +13,11 @@ export default function Login(props) {
 	const navigation = useNavigation();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const handleSubmit = (event) => {
-		event.preventDefault();
+
+	const handleSubmit = (evt) => {
+		// evt.preventDefault();
 		// save data locally
-		multiSet = async () => {
+		async () => {
 			const emailCache = ['@email', email];
 			const passwordCache = ['@password', password];
 			try {
@@ -27,24 +28,25 @@ export default function Login(props) {
 			}
 		};
 
-		// set json
-		setObjectValue = async (value) => {
+		// set json and post login
+		async (value) => {
 			try {
 				const jsonValue = JSON.stringify({
 					email: getCache('email'),
-					password: getCache('password')
+					password: getCache('password'),
 				});
 				// await AsyncStorage.setItem('@cadastro', jsonValue);
 				sendData('login', jsonValue);
 				console.log(jsonValue);
 				// await AsyncStorage.clear();
+				return navigation.navigate('Groups');
 			} catch (e) {
 				console.log(e);
 				// save error
 			}
 		};
-		return navigation.navigate('Groups');
 	};
+
 	return (
 		<View style={styles.bg}>
 			<LinearGradient
@@ -54,14 +56,14 @@ export default function Login(props) {
 				style={{ flex: 1 }}>
 				<View style={styles.container}>
 					<Text style={styles.title}>FinFamily</Text>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<TextInput
 							style={styles.input}
 							keyboardobype='email-address'
 							textContentType='emailAddress'
 							placeholder='E-Mail for access'
 							value={email}
-							onChangeText={(e) => setEmail(e.target.value)}
+							onChangeText={(e) => setEmail(e)}
 						/>
 						<TextInput
 							style={styles.input}
@@ -69,20 +71,22 @@ export default function Login(props) {
 							secureTextEntry={true}
 							placeholder='Password'
 							value={password}
-							onChangeText={(e) => setPassword(e.target.value)}
+							onChangeText={(e) => setPassword(e)}
 						/>
 						<View style={styles.buttonForm}>
-							<TouchableOpacity
-								color='#3ED4AF'
-								type='submit'
-								onPress={handleSubmit}>
-								<Text style={styles.txt}>Login</Text>
+							<TouchableOpacity color='#3ED4AF'>
+								{/* <input type='submit' value='Next' /> */}
+								<Text
+									style={styles.txt}
+									onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+									Login
+								</Text>
 							</TouchableOpacity>
 						</View>
 					</form>
 
 					<View style={styles.buttonHelp}>
-						<TouchableOpacity color='#3ED4AF' type='submit'>
+						<TouchableOpacity color='#3ED4AF'>
 							<Text style={styles.buttonHelp}>Need Help?</Text>
 						</TouchableOpacity>
 					</View>

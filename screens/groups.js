@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Text,
 	View,
@@ -8,8 +8,8 @@ import {
 	Image,
 } from 'react-native';
 import styles from '../constants/panelStyles';
-import navigation from '@react-navigation/native';
-import ImagePicker from 'react-native-image-picker';
+import { navigation, useNavigation } from '@react-navigation/native';
+// import ImagePicker from 'react-native-image-picker';
 import { Header, Icon } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendData } from '../hooks/sendData';
@@ -49,37 +49,37 @@ export default function Groups(props) {
 			};
 
 			// ImagePicker
-			const options = {
-				title: 'Select Avatar',
-				storageOptions: {
-					skipBackup: true,
-					path: 'images',
-				},
-			};
-			const picker = () => {
-				/**
-				 * The first arg is the options object for customization (it can also be null or omitted for default options),
-				 * The second arg is the callback which sends object: response (more info in the API Reference)
-				 */
-				ImagePicker.launchImageLibrary(options, (response) => {
-					console.log('Response = ', response);
+			// const options = {
+			// 	title: 'Select Avatar',
+			// 	storageOptions: {
+			// 		skipBackup: true,
+			// 		path: 'images',
+			// 	},
+			// };
+			// const picker = () => {
+			// 	/**
+			// 	 * The first arg is the options object for customization (it can also be null or omitted for default options),
+			// 	 * The second arg is the callback which sends object: response (more info in the API Reference)
+			// 	 */
+			// 	ImagePicker.launchImageLibrary(options, (response) => {
+			// 		console.log('Response = ', response);
 
-					if (response.didCancel) {
-						console.log('User cancelled image picker');
-					} else if (response.error) {
-						console.log('ImagePicker Error: ', response.error);
-					} else {
-						const source = {
-							uri: response.uri,
-						};
-						// You can also display the image using data:
-						// const source = { uri: 'data:image/jpeg;base64,' + response.data };
-						this.setState({
-							avatarSource: source,
-						});
-					}
-				});
-			};
+			// 		if (response.didCancel) {
+			// 			console.log('User cancelled image picker');
+			// 		} else if (response.error) {
+			// 			console.log('ImagePicker Error: ', response.error);
+			// 		} else {
+			// 			const source = {
+			// 				uri: response.uri,
+			// 			};
+			// 			// You can also display the image using data:
+			// 			// const source = { uri: 'data:image/jpeg;base64,' + response.data };
+			// 			this.setState({
+			// 				avatarSource: source,
+			// 			});
+			// 		}
+			// 	});
+			// };
 
 			return (
 				<Modal animationType='slide' transparent={true} visible={modalVisible}>
@@ -97,7 +97,7 @@ export default function Groups(props) {
 							<TouchableOpacity
 								color='#3ED4AF'
 								onPress={() => {
-									picker;
+									// picker;
 								}}>
 								<Icon name='insert_photo' type='material' color='#000' />
 								<Text style={styles.modalText}>upload image</Text>
@@ -169,14 +169,14 @@ export default function Groups(props) {
 						};
 						return (
 							<View style={styles.group}>
-								<TouchableHighlight
+								<TouchableOpacity
 									style={styles.groupImg}
 									onPress={() => {
 										navigation.navigate(`Panel`);
 									}}>
 									<Image />
 									<Text style={styles.groupName}>{item.group_name}</Text>
-								</TouchableHighlight>
+								</TouchableOpacity>
 							</View>
 						);
 					})
@@ -210,7 +210,7 @@ export default function Groups(props) {
 
 			{groupsList}
 
-			<TouchableHighlight
+			<TouchableOpacity
 				style={styles.openButton}
 				onPress={() => {
 					newGroup.setModalVisible(true);
@@ -223,7 +223,7 @@ export default function Groups(props) {
 						setModalVisible(!modalVisible);
 					}}
 				/>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		</View>
 	);
 }

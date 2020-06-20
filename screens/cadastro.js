@@ -19,16 +19,16 @@ export default function Cadastro(props) {
 		const [cpf, setCpf] = useState('');
 		const [dob, setDob] = useState('');
 
-		const handleSubmit = (event) => {
-			event.preventDefault();
+		const handleSubmit = (evt) => {
+			// evt.preventDefault();
 			// check data before next screen
-			const cpfIsValid = cpfField.isValid();
-			const dobIsValid = datetimeField.isValid();
-			const unmaskedCpf = cpfField.getRawValue();
+			const cpfIsValid = cpf.cpfField.isValid();
+			const dobIsValid = dob.datetimeField.isValid();
+			const unmaskedCpf = cpf.cpfField.getRawValue();
 
 			if (cpfIsValid && dobIsValid) {
 				// save data locally
-				multiSet = async () => {
+				async () => {
 					const nomeCache = ['@nome', nome];
 					const cpfCache = ['@cpf', unmaskedCpf];
 					const dobCache = ['@dob', dob];
@@ -69,21 +69,21 @@ export default function Cadastro(props) {
 					<View style={styles.container}>
 						<Text style={styles.titleCreate}>Create Account</Text>
 						<Text style={styles.subtitle}>Personal Information</Text>
-						<form style={styles.form}>
+						<form style={styles.form} onSubmit={handleSubmit}>
 							<TextInput
 								style={styles.input}
 								placeholder='Name'
 								value={nome}
-								onChangeText={(e) => setNome(e.target.value)}
+								onChangeText={(e) => setNome(e)}
 							/>
 							<TextInputMask
 								style={styles.input}
 								type={'cpf'}
 								value={cpf}
 								includeRawValueInChangeText={true}
-								onChangeText={(e) => setCpf(e.target.value)}
+								onChangeText={(e) => setCpf(e)}
 								// add the ref to a local var
-								ref={(ref) => (this.cpfField = ref)}
+								// ref={(ref) => cpfField = ref}
 								placeholder='CPF'
 								// maxLength={14}
 							/>
@@ -94,19 +94,22 @@ export default function Cadastro(props) {
 									format: 'DD/MM/YYYY',
 								}}
 								value={dob}
-								onChangeText={(e) => setDob(e.target.value)}
-								ref={(ref) => {
-									this.datetimeField = ref;
-								}}
+								onChangeText={(e) => setDob(e)}
+								// ref={(ref) => {
+								// 	dtField = ref;
+								// }}
 								placeholder='Date of Birth'
 								// maxLength={8}
 							/>
+
 							<View style={styles.buttonForm}>
-								<TouchableOpacity
-									color='#3ED4AF'
-									type='submit'
-									onPress={handleSubmit}>
-									<Text style={styles.txt}>Next</Text>
+								<TouchableOpacity color='#3ED4AF'>
+									{/* <input type='submit' value='Next' /> */}
+									<Text
+										style={styles.txt}
+										onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+										Next
+									</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
@@ -127,11 +130,11 @@ export default function Cadastro(props) {
 		const [password, setPassword] = useState('');
 		const [password2, setPassword2] = useState('');
 
-		const handleSubmit = (event) => {
-			event.preventDefault();
+		const handleSubmit = (evt) => {
+			// evt.preventDefault();
 			if (password === password2) {
 				// save data locally
-				multiSet = async () => {
+				async () => {
 					const emailCache = ['@email', email];
 					const passwordCache = ['@password', password];
 					try {
@@ -172,7 +175,7 @@ export default function Cadastro(props) {
 								textContentType='emailAddress'
 								placeholder='E-Mail for access'
 								value={email}
-								onChangeText={(e) => setEmail(e.target.value)}
+								onChangeText={(e) => setEmail(e)}
 							/>
 							<TextInput
 								style={styles.input}
@@ -180,7 +183,7 @@ export default function Cadastro(props) {
 								secureTextEntry={true}
 								placeholder='Password'
 								value={password}
-								onChangeText={(e) => setPassword(e.target.value)}
+								onChangeText={(e) => setPassword(e)}
 							/>
 							<TextInput
 								style={styles.input}
@@ -188,14 +191,17 @@ export default function Cadastro(props) {
 								secureTextEntry={true}
 								placeholder='Confirm password'
 								value={password2}
-								onChangeText={(e) => setPassword2(e.target.value)}
+								onChangeText={(e) => setPassword2(e)}
 							/>
+
 							<View style={styles.buttonForm}>
-								<TouchableOpacity
-									color='#3ED4AF'
-									type='submit'
-									onPress={handleSubmit}>
-									<Text style={styles.txt}>Next</Text>
+								<TouchableOpacity color='#3ED4AF'>
+									{/* <input type='submit' value='Next' /> */}
+									<Text
+										style={styles.txt}
+										onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+										Next
+									</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
@@ -216,10 +222,10 @@ export default function Cadastro(props) {
 		const [areaCode, setAreaCode] = useState('');
 		const [phone, setPhone] = useState('');
 
-		const handleSubmit = (event) => {
-			event.preventDefault();
+		const handleSubmit = (evt) => {
+			// evt.preventDefault();
 			// save data locally
-			multiSet = async () => {
+			async () => {
 				const nicknameCache = ['@nickname', nickname];
 				const areaCodeCache = ['@areaCode', areaCode];
 				const phoneCache = ['@phone', phone];
@@ -236,7 +242,7 @@ export default function Cadastro(props) {
 			};
 
 			// set json
-			setObjectValue = async (value) => {
+			async (value) => {
 				try {
 					const jsonValue = JSON.stringify({
 						full_name: getCache('nome'),
@@ -276,7 +282,7 @@ export default function Cadastro(props) {
 								type='text'
 								placeholder='Nickname'
 								value={nickname}
-								onChangeText={(e) => setNickname(e.target.value)}
+								onChangeText={(e) => setNickname(e)}
 							/>
 							<View style={styles.phoneNumber}>
 								<TextInputMask
@@ -286,7 +292,7 @@ export default function Cadastro(props) {
 										mask: '(99)',
 									}}
 									value={areaCode}
-									onChangeText={(e) => setAreaCode(e.target.value)}
+									onChangeText={(e) => setAreaCode(e)}
 									textContentType='number'
 									placeholder='(__)'
 								/>
@@ -298,19 +304,20 @@ export default function Cadastro(props) {
 										withDDD: false,
 									}}
 									value={phone}
-									onChangeText={(e) => setPhone(e.target.value)}
-									// add the ref to a local var
-									ref={(ref) => (this.phoneField = ref)}
+									onChangeText={(e) => setPhone(e)}
 									textContentType='number'
 									placeholder='_____-____'
 								/>
 							</View>
+
 							<View style={styles.buttonForm}>
-								<TouchableOpacity
-									color='#3ED4AF'
-									type='submit'
-									onPress={handleSubmit}>
-									<Text style={styles.txt}>Finish</Text>
+								<TouchableOpacity color='#3ED4AF'>
+									{/* <input type='submit' value='Next' /> */}
+									<Text
+										style={styles.txt}
+										onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+										Finish
+									</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
