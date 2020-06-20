@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
 	bg: {
 		backgroundColor: 'black',
 		flex: 1,
+		
 	},
 	container: {
 		flex: 1,
@@ -61,12 +62,13 @@ const styles = StyleSheet.create({
 		fontWeight: 'light',
 		color: 'white',
 		textAlign: 'right',
-		width: '80%'
+		width: '80%',
 	},
 	txt: {
 		fontSize: 20,
 		fontWeight: '700',
 	},
+	formInput: {},
 	input: {
 		margin: 8,
 		backgroundColor: '#fff',

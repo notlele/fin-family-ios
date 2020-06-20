@@ -1,86 +1,64 @@
-import React from 'react';
-import {
-	Text,
-	View,
-	Button,
-	TextInput,
-	Icon,
-	// StyleSheet,
-	// ScrollView,
-	// AsyncStorage
-} from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, TextInput, Icon } from 'react-native';
 import styles from '../constants/loginStyles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { TextInputMask } from 'react-native-masked-text';
 import { navigation, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useInput } from '../hooks/useInput';
+import { sendData } from '../hooks/sendData';
+import { getCache } from '../hooks/getCache';
 
-class Cadastro1 extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			nome: '',
-			cpf: '',
-			nasc: '',
+// TODO: Icons in inputs + phone field css
+
+export default function Cadastro(props) {
+	const navigation = useNavigation();
+	const Cadastro1 = () => {
+		const [nome, setNome] = useState('');
+		const [cpf, setCpf] = useState('');
+		const [dob, setDob] = useState('');
+
+		const handleSubmit = (event) => {
+			event.preventDefault();
+			// check data before next screen
+			const cpfIsValid = cpfField.isValid();
+			const dobIsValid = datetimeField.isValid();
+			const unmaskedCpf = cpfField.getRawValue();
+
+			if (cpfIsValid && dobIsValid) {
+				// save data locally
+				multiSet = async () => {
+					const nomeCache = ['@nome', nome];
+					const cpfCache = ['@cpf', unmaskedCpf];
+					const dobCache = ['@dob', dob];
+					try {
+						await AsyncStorage.multiSet([nomeCache, cpfCache, dobCache]);
+					} catch (e) {
+						console.log(e);
+						//save error
+					}
+				};
+				return navigation.navigate('Cadastro2');
+			} else if (!cpfIsValid) {
+				setCpf('');
+				return () =>
+					Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
+						cancelable: false,
+					});
+			} else if (!dobIsValid) {
+				setDob('');
+				return () =>
+					Alert.alert(
+						'Invalid date input',
+						'Check your birth date.',
+						[{ text: 'OK' }],
+						{
+							cancelable: false,
+						}
+					);
+			}
 		};
-
-		this.handleChangeNome = this.handleChangeNome.bind(this);
-		this.handleChangeCpf = this.handleChangeCpf.bind(this);
-		this.handleChangeNasc = this.handleChangeNasc.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChangeNome(event) {
-		this.setState({ nome: event.target.value });
-	}
-
-	handleChangeCpf(event) {
-		this.setState({ cpf: event.target.value });
-	}
-
-	handleChangeNasc(event) {
-		this.setState({ nasc: event.target.value });
-	}
-
-	// handlePress(pageName) {
-	// 	navigation.navigate(pageName);
-	// }
-
-	handleSubmit(event) {
-		// event.preventDefault();
-		// check cpf before next screen
-		// const cpfIsValid = this.cpfField.isValid();
-		// const unmasked = this.cpfField.getRawValue();
-		// const dobIsValid = this.datetimeField.isValid();
-
-		// if (cpfIsValid && dobIsValid) {
-		return () => {
-			navigation.navigate('Cadastro2', {
-				full_name: this.nome,
-				cpf: this.cpf,
-				birthday: this.dt,
-			});
-		};
-		// } else if (!cpfIsValid) {
-		// 	return () =>
-		// 		Alert.alert('Invalid CPF', 'Check your CPF.', [{ text: 'OK' }], {
-		// 			cancelable: false,
-		// 		});
-		// } else if (!dobIsValid) {
-		// 	return () =>
-		// 		Alert.alert(
-		// 			'Invalid date input',
-		// 			'Check your birth date.',
-		// 			[{ text: 'OK' }],
-		// 			{
-		// 				cancelable: false,
-		// 			}
-		// 		);
-		// }
-	}
-
-	render() {
-		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -95,25 +73,15 @@ class Cadastro1 extends React.Component {
 							<TextInput
 								style={styles.input}
 								placeholder='Name'
-								value={this.state.nome}
-								onChangeText={(text) => {
-									this.handleChangeNome;
-									this.setState({
-										nome: text,
-									});
-								}}
+								value={nome}
+								onChangeText={(e) => setNome(e.target.value)}
 							/>
 							<TextInputMask
 								style={styles.input}
 								type={'cpf'}
-								value={this.state.cpf}
+								value={cpf}
 								includeRawValueInChangeText={true}
-								onChangeText={(text) => {
-									this.handleChangeCpf;
-									this.setState({
-										cpf: text,
-									});
-								}}
+								onChangeText={(e) => setCpf(e.target.value)}
 								// add the ref to a local var
 								ref={(ref) => (this.cpfField = ref)}
 								placeholder='CPF'
@@ -125,15 +93,10 @@ class Cadastro1 extends React.Component {
 								options={{
 									format: 'DD/MM/YYYY',
 								}}
-								value={this.state.dt}
-								onChangeText={(text) => {
-									this.handleChangeNasc;
-									this.setState({
-										dt: text,
-									});
-								}}
-								refInput={(ref) => {
-									this.input = ref;
+								value={dob}
+								onChangeText={(e) => setDob(e.target.value)}
+								ref={(ref) => {
+									this.datetimeField = ref;
 								}}
 								placeholder='Date of Birth'
 								// maxLength={8}
@@ -142,14 +105,14 @@ class Cadastro1 extends React.Component {
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
-									onPress={this.handleSubmit}>
+									onPress={handleSubmit}>
 									<Text style={styles.txt}>Next</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
 
 						<View style={styles.buttonHelp}>
-							<TouchableOpacity color='#3ED4AF' type='submit'>
+							<TouchableOpacity color='#3ED4AF'>
 								<Text style={styles.buttonHelp}>Need Help?</Text>
 							</TouchableOpacity>
 						</View>
@@ -157,66 +120,41 @@ class Cadastro1 extends React.Component {
 				</LinearGradient>
 			</View>
 		);
-	}
-}
+	};
 
-class Cadastro2 extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			full_name: Cadastro1.nome,
-			cpf: Cadastro1.cpf, // unmasked, // uses the getRawValue
-			birthday: Cadastro1.nasc,
-			email: '',
-			password: '',
-			password2: '',
+	const Cadastro2 = () => {
+		const [email, setEmail] = useState('');
+		const [password, setPassword] = useState('');
+		const [password2, setPassword2] = useState('');
+
+		const handleSubmit = (event) => {
+			event.preventDefault();
+			if (password === password2) {
+				// save data locally
+				multiSet = async () => {
+					const emailCache = ['@email', email];
+					const passwordCache = ['@password', password];
+					try {
+						await AsyncStorage.multiSet([emailCache, passwordCache]);
+					} catch (e) {
+						console.log(e);
+						//save error
+					}
+				};
+				return navigation.navigate('Cadastro3');
+			} else {
+				return () =>
+					Alert.alert(
+						'Passwords do not match',
+						'Type the password again.',
+						[{ text: 'OK' }],
+						{
+							cancelable: false,
+						}
+					);
+			}
 		};
 
-		this.handleChangeEmail = this.handleChangeEmail.bind(this);
-		this.handleChangePassword = this.handleChangePassword.bind(this);
-		this.handleChangePassword2 = this.handleChangePassword2.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChangeEmail(event) {
-		this.setState({ email: event.target.value });
-	}
-
-	handleChangePassword(event) {
-		this.setState({ password: event.target.value });
-	}
-
-	handleChangePassword2(event) {
-		this.setState({ password2: event.target.value });
-	}
-
-	handleSubmit(event) {
-		event.preventDefault();
-		if (password === password2) {
-			return () => {
-				navigation.navigate('Cadastro3', {
-					full_name: this.full_name,
-					cpf: this.cpf,
-					birthday: this.birthday,
-					email: this.email,
-					password: this.password,
-				});
-			};
-		} else {
-			return () =>
-				Alert.alert(
-					'Passwords do not match',
-					'Type the password again.',
-					[{ text: 'OK' }],
-					{
-						cancelable: false,
-					}
-				);
-		}
-	}
-
-	render() {
-		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -227,58 +165,43 @@ class Cadastro2 extends React.Component {
 					<View style={styles.container}>
 						<Text style={styles.titleCreate}>Create Account</Text>
 						<Text style={styles.subtitle}>Access Information</Text>
-						<form onSubmit={this.handleSubmit}>
+						<form>
 							<TextInput
 								style={styles.input}
-								keyboardType='email-address'
+								keyboardobype='email-address'
 								textContentType='emailAddress'
 								placeholder='E-Mail for access'
-								value={this.state.email}
-								onChangeText={(text) => {
-									this.handleChangeEmail;
-									this.setState({
-										email: text,
-									});
-								}}
+								value={email}
+								onChangeText={(e) => setEmail(e.target.value)}
 							/>
 							<TextInput
 								style={styles.input}
 								type='password'
 								secureTextEntry={true}
 								placeholder='Password'
-								value={this.state.password}
-								onChangeText={(text) => {
-									this.handleChangePassword;
-									this.setState({
-										password: text,
-									});
-								}}
+								value={password}
+								onChangeText={(e) => setPassword(e.target.value)}
 							/>
 							<TextInput
 								style={styles.input}
 								type='password'
 								secureTextEntry={true}
 								placeholder='Confirm password'
-								value={this.state.password2}
-								onChangeText={(text) => {
-									this.handleChangePassword2;
-									this.setState({
-										password2: text,
-									});
-								}}
+								value={password2}
+								onChangeText={(e) => setPassword2(e.target.value)}
 							/>
 							<View style={styles.buttonForm}>
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
-									onPress={this.handleSubmit}>
+									onPress={handleSubmit}>
 									<Text style={styles.txt}>Next</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
 
 						<View style={styles.buttonHelp}>
-							<TouchableOpacity color='#3ED4AF' type='submit'>
+							<TouchableOpacity color='#3ED4AF'>
 								<Text style={styles.buttonHelp}>Need Help?</Text>
 							</TouchableOpacity>
 						</View>
@@ -286,82 +209,57 @@ class Cadastro2 extends React.Component {
 				</LinearGradient>
 			</View>
 		);
-	}
-}
+	};
 
-class Cadastro3 extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			full_name: Cadastro1.nome,
-			cpf: Cadastro1.cpf, // unmasked, // uses the getRawValue
-			birthday: Cadastro1.nasc,
-			email: Cadastro2.email,
-			password: Cadastro2.password,
-			nickname: '',
-			phone_area_code: '',
-			phone: '',
+	const Cadastro3 = () => {
+		const [nickname, setNickname] = useState('');
+		const [areaCode, setAreaCode] = useState('');
+		const [phone, setPhone] = useState('');
+
+		const handleSubmit = (event) => {
+			event.preventDefault();
+			// save data locally
+			multiSet = async () => {
+				const nicknameCache = ['@nickname', nickname];
+				const areaCodeCache = ['@areaCode', areaCode];
+				const phoneCache = ['@phone', phone];
+				try {
+					await AsyncStorage.multiSet([
+						nicknameCache,
+						areaCodeCache,
+						phoneCache,
+					]);
+				} catch (e) {
+					console.log(e);
+					//save error
+				}
+			};
+
+			// set json
+			setObjectValue = async (value) => {
+				try {
+					const jsonValue = JSON.stringify({
+						full_name: getCache('nome'),
+						cpf: getCache('cpf'),
+						birthday: getCache('dob'),
+						email: getCache('email'),
+						password: getCache('password'),
+						nickname: getCache('nickname'),
+						phone_area_code: getCache('areaCode'),
+						phone: getCache('phone'),
+					});
+					// await AsyncStorage.setItem('@cadastro', jsonValue);
+					sendData('cadastro', jsonValue);
+					console.log(jsonValue);
+					return navigation.navigate('Groups');
+					// await AsyncStorage.clear();
+				} catch (e) {
+					console.log(e);
+					// save error
+				}
+			};
 		};
 
-		this.handleChangeNickname = this.handleChangeNickname.bind(this);
-		this.handleChangeCode = this.handleChangeCode.bind(this);
-		this.handleChangePhone = this.handleChangePhone.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChangeNickname(event) {
-		this.setState({ nickname: event.target.value });
-	}
-
-	handleChangeCode(event) {
-		this.setState({ phone_area_code: event.target.value });
-	}
-
-	handleChangePhone(event) {
-		this.setState({ phone: event.target.value });
-	}
-
-	handleSubmit(event) {
-		event.preventDefault();
-		axios.defaults.headers.post['Content-Type'] =
-			'application/json;charset=utf-8';
-		axios
-			.post('http://35.237.149.227/cadastro/', Cadastro3)
-			.then((res) => {
-				const cookies = new Cookies();
-				cookies.set('full_name', res.data.full_name, { path: '/' });
-				cookies.set('cpf', res.data.cpf, { path: '/' });
-				cookies.set('birthday', res.data.birthday, { path: '/' });
-				cookies.set('email', res.data.email, { path: '/' });
-				cookies.set('password', res.data.password, { path: '/' });
-				cookies.set('nickname', res.data.nickname, { path: '/' });
-				cookies.set('phone', res.data.phone, { path: '/' });
-				cookies.set('phone_area_code', res.data.phone_area_code, {
-					path: '/',
-				});
-
-				return navigation.navigate('Login');
-			})
-			.catch((error) => {
-				const wrongPw = () =>
-					Alert.alert(
-						'Error',
-						'We couldn`t sign you up.\nPlease try again'[{ text: 'OK' }],
-						{
-							cancelable: false,
-						}
-					);
-				if (error.response.status === 500) {
-					console.log('Dados inválidos!');
-				} else if (error.response.status === 404) {
-					console.log('Usuário não encontrado!');
-				}
-				return <Button title={'Wrong Login'} onPress={wrongPw} />;
-			});
-	}
-
-	render() {
-		const { navigation } = this.props;
 		return (
 			<View style={styles.bg}>
 				<LinearGradient
@@ -372,66 +270,53 @@ class Cadastro3 extends React.Component {
 					<View style={styles.container}>
 						<Text style={styles.titleCreate}>Create Account</Text>
 						<Text style={styles.subtitle}>Access Information</Text>
-						<form onSubmit={this.handleSubmit}>
+						<form>
 							<TextInput
 								style={styles.input}
 								type='text'
 								placeholder='Nickname'
-								value={this.state.nickname}
-								onChangeText={(text) => {
-									this.handleChangeNickname;
-									this.setState({
-										nickname: text,
-									});
-								}}
+								value={nickname}
+								onChangeText={(e) => setNickname(e.target.value)}
 							/>
 							<View style={styles.phoneNumber}>
 								<TextInputMask
+									style={styles.inputSmall}
 									type={'custom'}
 									options={{
 										mask: '(99)',
 									}}
-									onChangeText={(text) => {
-										this.handleChangeCode;
-										this.setState({
-											ddd: text,
-										});
-									}}
-									style={styles.inputSmall}
+									value={areaCode}
+									onChangeText={(e) => setAreaCode(e.target.value)}
 									textContentType='number'
 									placeholder='(__)'
 								/>
 								<TextInputMask
+									style={styles.inputMedium}
 									type={'cel-phone'}
 									options={{
 										maskType: 'BRL',
 										withDDD: false,
 									}}
-									onChangeText={(text) => {
-										this.handleChangePhone;
-										this.setState({
-											phone: text,
-										});
-									}}
+									value={phone}
+									onChangeText={(e) => setPhone(e.target.value)}
 									// add the ref to a local var
 									ref={(ref) => (this.phoneField = ref)}
 									textContentType='number'
 									placeholder='_____-____'
-									style={styles.inputMedium}
 								/>
 							</View>
 							<View style={styles.buttonForm}>
 								<TouchableOpacity
 									color='#3ED4AF'
 									type='submit'
-									onPress={this.handleSubmit}>
-									<Text style={styles.txt}>Next</Text>
+									onPress={handleSubmit}>
+									<Text style={styles.txt}>Finish</Text>
 								</TouchableOpacity>
 							</View>
 						</form>
 
 						<View style={styles.buttonHelp}>
-							<TouchableOpacity color='#3ED4AF' type='submit'>
+							<TouchableOpacity color='#3ED4AF'>
 								<Text style={styles.buttonHelp}>Need Help?</Text>
 							</TouchableOpacity>
 						</View>
@@ -439,12 +324,7 @@ class Cadastro3 extends React.Component {
 				</LinearGradient>
 			</View>
 		);
-	}
-}
+	};
 
-// Wrap and export
-export default function Cadastro(props) {
-	const navigation = useNavigation();
-
-	return <Cadastro1 {...props} navigation={navigation} />;
+	return <Cadastro1 />;
 }

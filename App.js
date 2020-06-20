@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import useLinking from './navigation/useLinking';
 import Home from './screens/home';
 import Login from './screens/login';
-import Cadastro1 from './screens/cadastro';
+import Cadastro from './screens/cadastro';
 import Groups from './screens/groups';
 import Panel from './screens/panel';
 import Extrato from './screens/extrato';
@@ -34,7 +33,6 @@ export default function App(props) {
 				setLoadingComplete(true);
 			}
 		}
-
 		loadResourcesAndDataAsync();
 	}, []);
 
@@ -43,14 +41,14 @@ export default function App(props) {
 	} else {
 		return (
 			<View style={styles.container}>
-				{Platform.OS === 'android' && <StatusBar barStyle='default' />}
+				{Platform.OS === 'iOS' && <StatusBar barStyle='default' />}
 				<NavigationContainer
 					ref={containerRef}
 					initialState={initialNavigationState}>
 					<Stack.Navigator>
 						<Stack.Screen name='Home' component={Home} />
 						<Stack.Screen name='Login' component={Login} />
-						<Stack.Screen name='Cadastro' component={Cadastro1} />
+						<Stack.Screen name='Cadastro' component={Cadastro} />
 						<Stack.Screen name='Groups' component={Groups} />
 						<Stack.Screen name='Panel' component={Panel} />
 						{/* <Stack.Screen name='Extrato' component={Extrato} />
