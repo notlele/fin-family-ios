@@ -7,7 +7,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native';
-import styles from '../constants/panelStyles';
+import styles from '../constants/painelStyles';
 import { navigation, useNavigation } from '@react-navigation/native';
 // import ImagePicker from 'react-native-image-picker';
 import { Header, Icon } from 'react-native-elements';
@@ -172,7 +172,7 @@ export default function Groups(props) {
 								<TouchableOpacity
 									style={styles.groupImg}
 									onPress={() => {
-										navigation.navigate(`Panel`);
+										navigation.navigate(`Painel`);
 									}}>
 									<Image />
 									<Text style={styles.groupName}>{item.group_name}</Text>
@@ -194,6 +194,7 @@ export default function Groups(props) {
 	return (
 		<View style={styles.container}>
 			<Header
+				style={styles.header}
 				leftComponent={{
 					text: 'Groups',
 					style: { color: '#000' },
@@ -220,7 +221,7 @@ export default function Groups(props) {
 					type='material'
 					color='#000'
 					onPress={() => {
-						setModalVisible(!modalVisible);
+						newGroup.setModalVisible(!newGroup.modalVisible);
 					}}
 				/>
 			</TouchableOpacity>

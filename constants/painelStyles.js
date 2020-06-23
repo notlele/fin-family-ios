@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 	bg: {
-		backgroundColor: 'black',
+		backgroundColor: 'white',
 		flex: 1,
 	},
 	container: {
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
 	modalText: {
 		marginBottom: 15,
 		textAlign: 'center',
+	},
+	header: {
+		backgroundColor: '#3ED4AF',
+		width: '100%',
 	},
 });
 
