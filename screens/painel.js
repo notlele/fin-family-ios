@@ -1,8 +1,13 @@
 import React from 'react';
-import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../constants/painelStyles';
+import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { Header, Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import { navigation, useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { sendData } from '../hooks/sendData';
+import { getData } from '../hooks/getData';
+import { getCache } from '../hooks/getCache';
 
 export default function Painel(props) {
 	const navigation = useNavigation();
@@ -11,28 +16,27 @@ export default function Painel(props) {
 	const newInvoice = () => {
 		const [modalVisible, setModalVisible] = useState(false);
 
-			return (
-				<Modal animationType='slide' transparent={true} visible={modalVisible}>
-					<View style={styles.centeredView}>
-						<View style={styles.modalView}>
-							<Text style={styles.modalText}>New Invoice</Text>
+		return (
+			<Modal animationType='slide' transparent={true} visible={modalVisible}>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>New Invoice</Text>
 
-							<TouchableOpacity
-								color='#65E674'
-								onPress={() => navigation.navigate('modalInvoice')}>
-								<Icon name='insert_photo' type='material' color='#000' />
-							</TouchableOpacity>
+						<TouchableOpacity
+							color='#65E674'
+							onPress={() => navigation.navigate('modalInvoice')}>
+							<Icon name='insert_photo' type='material' color='#000' />
+						</TouchableOpacity>
 
-							<TouchableOpacity
-								color='#FF1B1B'
-								onPress={() => navigation.navigate('modalExpense')}>
-								<Text style={styles.modalText}>New Expense</Text>
-							</TouchableOpacity>
-						</View>
+						<TouchableOpacity
+							color='#FF1B1B'
+							onPress={() => navigation.navigate('modalExpense')}>
+							<Text style={styles.modalText}>New Expense</Text>
+						</TouchableOpacity>
 					</View>
-				</Modal>
-			);
-		};
+				</View>
+			</Modal>
+		);
 	};
 
 	// add new entry
@@ -169,16 +173,20 @@ export default function Painel(props) {
 		<View style={styles.bg}>
 			<LinearGradient
 				colors={['rgba(52,202,154,0.8)', 'rgba(160,61,179,0.45)']}
-				start={[0.5, 0.5]}
-				end={[0.3, 1.0]}
+				start={[0.5, 0.9]}
+				end={[0.1, 1.0]}
 				style={{ flex: 1 }}>
 				<View style={styles.container}>
 					<Header
+						containerStyle={{
+							backgroundColor: '#3ED4AF',
+							width: '100%',
+						}}
 						leftComponent={{
 							text: 'Family Panel',
 							style: {
 								color: '#000',
-								marginLeft: 5,
+								marginLeft: 10,
 							},
 						}}
 					/>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../constants/painelStyles';
 import {
 	Text,
 	View,
@@ -7,7 +8,6 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native';
-import styles from '../constants/painelStyles';
 import { navigation, useNavigation } from '@react-navigation/native';
 // import ImagePicker from 'react-native-image-picker';
 import { Header, Icon } from 'react-native-elements';
