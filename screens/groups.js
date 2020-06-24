@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../constants/painelStyles';
+import styles from '../constants/groupsStyles';
 import {
 	Text,
 	View,
@@ -193,7 +193,7 @@ export default function Groups(props) {
 	// };
 
 	return (
-		<View style={styles.bg}>
+		<View style={styles.container}>
 			<Header
 				containerStyle={{
 					backgroundColor: '#3ED4AF',

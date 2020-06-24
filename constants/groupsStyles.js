@@ -1,15 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-	bg: {
-		flex: 1,
-	},
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		// fontFamily: 'Roboto',
 		textAlign: 'center',
-		marginBottom: '10px',
+		// fontFamily: 'Roboto',
 	},
 	center: {
 		justifyContent: 'center',
@@ -140,6 +136,24 @@ const styles = StyleSheet.create({
 	navigator: {
 		width: '100%',
 		height: '32px',
+	},
+	groupList: {
+		flex: 1,
+		width: '50%',
+		height: '60%',
+		margin: '10px',
+		justifyContent: 'flex-start',
+	},
+	groupImg: {
+		width: '120px',
+		height: '120px',
+	},
+	group: {
+		margin: '10px',
+	},
+	groupName: {
+		fontWeight: '200',
+		fontSize: '15px',
 	},
 });
 
