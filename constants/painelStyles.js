@@ -18,6 +18,18 @@ const styles = StyleSheet.create({
 		width: '90%',
 		height: '70%',
 	},
+	moneyDetails: {
+		flex: 1,
+		flexDirection: 'row',
+		width: '100%',
+		justifyContent: 'space-between',
+	},
+	earnings: {
+		paddingLeft: '5%',
+	},
+	expenses: {
+		paddingRight: '5%',
+	},
 	title: {
 		fontSize: 50,
 		position: 'absolute',
@@ -29,6 +41,7 @@ const styles = StyleSheet.create({
 	buttons: {
 		width: '80%',
 		borderStyle: 'solid',
+		margin: 'auto',
 	},
 	button1: {
 		margin: 2,
@@ -53,22 +66,32 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	overview: {
-		width: '80%',
+		width: '100%',
+		height: '65%',
+		margin: 'auto',
+		position: 'absolute',
 	},
 	circleOverview: {
-		background: 'none',
+		backgroundColor: 'white',
+		// borderColor: 'red',
+		// borderStyle: 'solid',
+		// width: 99,
+		height: '100%',
 		borderRadius: 200,
-		padding: 70,
-		borderWidth: 2,
-		borderColor: 'red',
-		borderStyle: 'solid',
+		borderWidth: 0,
+		justifyContent: 'center',
+	},
+	txtOverview: {
+		margin: 'auto',
+		justifyContent: 'space-around',
 	},
 	titleOverview: {
+		padding: 10,
 		fontSize: '20px',
 	},
 	valueOverview: {
 		padding: 20,
-		fontSize: '20px',
+		fontSize: '24px',
 		fontWeight: '500',
 	},
 	category: {

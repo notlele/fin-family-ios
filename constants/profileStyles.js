@@ -1,16 +1,19 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-	bg: {
-		backgroundColor: 'black',
-		flex: 1,
-	},
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center',
 		// fontFamily: 'Roboto',
 		textAlign: 'center',
+	},
+	center: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		// fontFamily: 'Roboto',
+		textAlign: 'center',
+		width: '90%',
+		height: '70%',
 	},
 	title: {
 		fontSize: 50,
@@ -21,66 +24,38 @@ const styles = StyleSheet.create({
 		color: 'white',
 	},
 	buttons: {
-		width: '90%',
-		position: 'relative',
-		top: '30%',
-		justifyContent: 'space-between',
+		width: '80%',
+		borderStyle: 'solid',
 	},
 	button1: {
-		margin: 8,
+		margin: 2,
 		backgroundColor: '#65E674',
 		borderRadius: 30,
-		borderWidth: 12,
+		borderWidth: 5,
 		borderColor: '#65E674',
-		borderStyle: 'solid',
 	},
 	button2: {
-		margin: 8,
-		backgroundColor: '#3ED4AF',
+		margin: 2,
+		backgroundColor: '#FF1B1B',
 		borderRadius: 30,
-		borderWidth: 12,
-		borderColor: '#3ED4AF',
-		borderStyle: 'solid',
+		borderWidth: 5,
+		borderColor: '#FF1B1B',
 	},
 	txt: {
 		fontSize: 20,
 		fontWeight: '700',
 	},
-	centeredView: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		marginTop: 22,
+	titleOverview: {
+		fontSize: '20px',
 	},
-	modalView: {
-		margin: 20,
-		backgroundColor: 'white',
-		borderRadius: 20,
-		padding: 35,
-		alignItems: 'center',
-		shadowColor: '#000',
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 3.84,
-		elevation: 5,
+	valueOverview: {
+		padding: 20,
+		fontSize: '20px',
+		fontWeight: '500',
 	},
-	openButton: {
-		backgroundColor: '#F194FF',
-		borderRadius: 20,
-		padding: 10,
-		elevation: 2,
-	},
-	textStyle: {
-		color: 'white',
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-	modalText: {
-		marginBottom: 15,
-		textAlign: 'center',
+	category: {
+		fontSize: '15px',
+		fontWeight: '300',
 	},
 });
 

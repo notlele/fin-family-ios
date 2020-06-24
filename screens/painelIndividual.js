@@ -182,6 +182,7 @@ export default function Painel(props) {
 						containerStyle={{
 							backgroundColor: '#3ED4AF',
 							width: '100%',
+							height: '55px',
 							justifyContent: 'space-around',
 							border: 'none',
 						}}
@@ -241,18 +242,39 @@ export default function Painel(props) {
 						</View>
 
 						<View style={styles.overview}>
-							<View
-								style={styles.circleOverview}
-								ViewComponent={LinearGradient}
-								linearGradientProps={{
-									colors: ['red', 'green'],
-									start: { x: 0, y: 0.5 },
-									end: { x: 1, y: 0.5 },
+							<LinearGradient
+								colors={['red', 'green']}
+								start={[0.5, 1.0]}
+								end={[1.0, 1.0]}
+								style={{
+									borderRadius: 200,
+									borderWidth: 0,
+									padding: 2,
+									flex: 1,
 								}}>
-								<Text style={styles.titleOverview}>Available</Text>
-								<Text style={styles.valueOverview}>1230,00</Text>
-								<Icon name='error-outline' type='material' color='#000' />
-							</View>
+								<View style={styles.circleOverview}>
+									<LinearGradient
+										colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
+										start={[0.5, 0.9]}
+										end={[0.1, 1.0]}
+										style={{
+											borderRadius: 200,
+											borderWidth: 0,
+											flex: 1,
+										}}>
+										<View style={styles.txtOverview}>
+											<Text style={styles.titleOverview}>Available</Text>
+											<Text style={styles.valueOverview}>1230,00</Text>
+											<Icon
+												name='error-outline'
+												type='material'
+												color='gray'
+												style={{ padding: 10 }}
+											/>
+										</View>
+									</LinearGradient>
+								</View>
+							</LinearGradient>
 						</View>
 					</View>
 
