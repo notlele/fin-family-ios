@@ -2,15 +2,21 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 	bg: {
-		backgroundColor: 'white',
 		flex: 1,
 	},
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center',
 		// fontFamily: 'Roboto',
 		textAlign: 'center',
+	},
+	center: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		// fontFamily: 'Roboto',
+		textAlign: 'center',
+		width: '90%',
+		height: '70%',
 	},
 	title: {
 		fontSize: 50,
@@ -21,30 +27,72 @@ const styles = StyleSheet.create({
 		color: 'white',
 	},
 	buttons: {
-		width: '90%',
-		position: 'relative',
-		top: '30%',
-		justifyContent: 'space-between',
+		width: '80%',
+		borderStyle: 'solid',
 	},
 	button1: {
-		margin: 8,
+		margin: 2,
 		backgroundColor: '#65E674',
 		borderRadius: 30,
-		borderWidth: 12,
+		borderWidth: 5,
 		borderColor: '#65E674',
-		borderStyle: 'solid',
 	},
 	button2: {
-		margin: 8,
-		backgroundColor: '#3ED4AF',
+		margin: 2,
+		backgroundColor: '#FF1B1B',
 		borderRadius: 30,
-		borderWidth: 12,
-		borderColor: '#3ED4AF',
-		borderStyle: 'solid',
+		borderWidth: 5,
+		borderColor: '#FF1B1B',
 	},
 	txt: {
 		fontSize: 20,
 		fontWeight: '700',
+	},
+	month: {
+		height: '10%',
+	},
+	monthTxt: {
+		//
+	},
+	header: {
+		backgroundColor: '#3ED4AF',
+		width: '100%',
+	},
+	overview: {
+		//
+	},
+	circleOverview: {
+		background: 'none',
+		borderRadius: '100%',
+		padding: 10,
+		borderWidth: 2,
+		borderColor: 'red',
+		borderStyle: 'solid',
+	},
+	titleOverview: {
+		padding: 10,
+		fontSize: '20px',
+	},
+	valueOverview: {
+		padding: 10,
+		fontSize: '20px',
+		fontWeight: '500',
+	},
+	category: {
+		fontSize: '15px',
+		fontWeight: '300',
+	},
+	value1: {
+		padding: 10,
+		fontSize: '15px',
+		fontWeight: 'bold',
+		color: '#2176D3',
+	},
+	value2: {
+		padding: 10,
+		fontSize: '15px',
+		fontWeight: 'bold',
+		color: '#FF0000',
 	},
 	centeredView: {
 		flex: 1,
@@ -81,10 +129,6 @@ const styles = StyleSheet.create({
 	modalText: {
 		marginBottom: 15,
 		textAlign: 'center',
-	},
-	header: {
-		backgroundColor: '#3ED4AF',
-		width: '100%',
 	},
 });
 

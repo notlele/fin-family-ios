@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../constants/painelStyles';
 import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
-import { LinearGradient } from 'expo-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import { navigation, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendData } from '../hooks/sendData';
@@ -197,37 +197,37 @@ export default function Painel(props) {
 						<TouchableOpacity onPress={() => {}}>
 							<Icon name='keyboard_arrow_left' type='material' color='#000' />
 						</TouchableOpacity>
+
 						<Text style={styles.monthTxt}>May</Text>
+
 						<TouchableOpacity onPress={() => {}}>
 							<Icon name='keyboard_arrow_right' type='material' color='#000' />
 						</TouchableOpacity>
 					</View>
 
-					<View style={styles.center}>
-						<View style={styles.moneyDetails}>
-							<View style={styles.earnings}>
-								<Text style={styles.category}>Earnings</Text>
-								<Text style={styles.value1}>1350,00</Text>
-							</View>
-							<View style={styles.expenses}>
-								<Text style={styles.category}>Expenses</Text>
-								<Text style={styles.value2}>1230,00</Text>
-							</View>
+					<View style={styles.moneyDetails}>
+						<View style={styles.earnings}>
+							<Text style={styles.category}>Earnings</Text>
+							<Text style={styles.value}>1350,00</Text>
 						</View>
+						<View style={styles.expenses}>
+							<Text style={styles.category}>Expenses</Text>
+							<Text style={styles.value}>1230,00</Text>
+						</View>
+					</View>
 
-						<View style={styles.overview}>
-							<View
-								style={styles.circleOverview}
-								ViewComponent={LinearGradient}
-								linearGradientProps={{
-									colors: ['red', 'green'],
-									start: { x: 0, y: 0.5 },
-									end: { x: 1, y: 0.5 },
-								}}>
-								<Text style={styles.titleOverview}>Available</Text>
-								<Text style={styles.valueOverview}>1230,00</Text>
-								<Icon name='error_outline' type='material' color='#000' />
-							</View>
+					<View style={styles.overview}>
+						<View
+							style={styles.circleOverview}
+							ViewComponent={LinearGradient}
+							linearGradientProps={{
+								colors: ['red', 'green'],
+								start: { x: 0, y: 0.5 },
+								end: { x: 1, y: 0.5 },
+							}}>
+							<Text style={styles.titleOverview}>Available</Text>
+							<Text style={styles.valueOverview}>1230,00</Text>
+							<Icon name='error_outline' type='material' color='#000' />
 						</View>
 					</View>
 
