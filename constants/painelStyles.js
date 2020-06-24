@@ -50,31 +50,24 @@ const styles = StyleSheet.create({
 	},
 	month: {
 		height: '10%',
-	},
-	monthTxt: {
-		//
-	},
-	header: {
-		backgroundColor: '#3ED4AF',
 		width: '100%',
 	},
 	overview: {
-		//
+		width: '80%',
 	},
 	circleOverview: {
 		background: 'none',
-		borderRadius: '100%',
-		padding: 10,
+		borderRadius: 200,
+		padding: 70,
 		borderWidth: 2,
 		borderColor: 'red',
 		borderStyle: 'solid',
 	},
 	titleOverview: {
-		padding: 10,
 		fontSize: '20px',
 	},
 	valueOverview: {
-		padding: 10,
+		padding: 20,
 		fontSize: '20px',
 		fontWeight: '500',
 	},

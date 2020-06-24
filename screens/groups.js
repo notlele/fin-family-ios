@@ -99,7 +99,7 @@ export default function Groups(props) {
 								onPress={() => {
 									// picker;
 								}}>
-								<Icon name='insert_photo' type='material' color='#000' />
+								<Icon name='insert-photo' type='material' color='#000' />
 								<Text style={styles.modalText}>upload image</Text>
 							</TouchableOpacity>
 
@@ -194,13 +194,17 @@ export default function Groups(props) {
 	return (
 		<View style={styles.container}>
 			<Header
-				style={styles.header}
+				containerStyle={{
+					backgroundColor: '#3ED4AF',
+					width: '100%',
+					justifyContent: 'space-around',
+				}}
 				leftComponent={{
 					text: 'Groups',
 					style: { color: '#000' },
 				}}
 				rightComponent={{
-					icon: 'power_settings_new',
+					icon: 'power-settings-new',
 					color: '#000',
 					// onPress={() => {
 					// 	await AsyncStorage.clear();

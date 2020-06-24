@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../constants/painelStyles';
 import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import { navigation, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { sendData } from '../hooks/sendData';
@@ -173,7 +173,7 @@ export default function Painel(props) {
 	return (
 		<View style={styles.bg}>
 			<LinearGradient
-				colors={['rgba(52,202,154,0.8)', 'rgba(160,61,179,0.45)']}
+				colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
 				start={[0.5, 0.9]}
 				end={[0.1, 1.0]}
 				style={{ flex: 1 }}>
@@ -183,6 +183,7 @@ export default function Painel(props) {
 							backgroundColor: '#3ED4AF',
 							width: '100%',
 							justifyContent: 'space-around',
+							border: 'none',
 						}}
 						leftComponent={{
 							text: 'Family Panel',
@@ -194,40 +195,64 @@ export default function Painel(props) {
 					/>
 
 					<View style={styles.month}>
-						<TouchableOpacity onPress={() => {}}>
-							<Icon name='keyboard_arrow_left' type='material' color='#000' />
-						</TouchableOpacity>
-
-						<Text style={styles.monthTxt}>May</Text>
-
-						<TouchableOpacity onPress={() => {}}>
-							<Icon name='keyboard_arrow_right' type='material' color='#000' />
-						</TouchableOpacity>
+						<Header
+							containerStyle={{
+								backgroundColor: 'none',
+								width: '100%',
+								justifyContent: 'space-around',
+								border: 'none',
+								padding: 'auto 100px',
+							}}
+							leftComponent={{
+								icon: 'keyboard-arrow-left',
+								brand: 'material',
+								color: '#000',
+								// onPress={() => {
+								// 	await AsyncStorage.clear();
+								// 	navigation.navigate('Home');
+								// }}
+							}}
+							centerComponent={{
+								text: 'May',
+								style: { color: '#000' },
+							}}
+							rightComponent={{
+								icon: 'keyboard-arrow-right',
+								brand: 'material',
+								color: '#000',
+								// onPress={() => {
+								// 	await AsyncStorage.clear();
+								// 	navigation.navigate('Home');
+								// }}
+							}}
+						/>
 					</View>
 
-					<View style={styles.moneyDetails}>
-						<View style={styles.earnings}>
-							<Text style={styles.category}>Earnings</Text>
-							<Text style={styles.value}>1350,00</Text>
+					<View style={styles.center}>
+						<View style={styles.moneyDetails}>
+							<View style={styles.earnings}>
+								<Text style={styles.category}>Earnings</Text>
+								<Text style={styles.value1}>1350,00</Text>
+							</View>
+							<View style={styles.expenses}>
+								<Text style={styles.category}>Expenses</Text>
+								<Text style={styles.value2}>1230,00</Text>
+							</View>
 						</View>
-						<View style={styles.expenses}>
-							<Text style={styles.category}>Expenses</Text>
-							<Text style={styles.value}>1230,00</Text>
-						</View>
-					</View>
 
-					<View style={styles.overview}>
-						<View
-							style={styles.circleOverview}
-							ViewComponent={LinearGradient}
-							linearGradientProps={{
-								colors: ['red', 'green'],
-								start: { x: 0, y: 0.5 },
-								end: { x: 1, y: 0.5 },
-							}}>
-							<Text style={styles.titleOverview}>Available</Text>
-							<Text style={styles.valueOverview}>1230,00</Text>
-							<Icon name='error_outline' type='material' color='#000' />
+						<View style={styles.overview}>
+							<View
+								style={styles.circleOverview}
+								ViewComponent={LinearGradient}
+								linearGradientProps={{
+									colors: ['red', 'green'],
+									start: { x: 0, y: 0.5 },
+									end: { x: 1, y: 0.5 },
+								}}>
+								<Text style={styles.titleOverview}>Available</Text>
+								<Text style={styles.valueOverview}>1230,00</Text>
+								<Icon name='error-outline' type='material' color='#000' />
+							</View>
 						</View>
 					</View>
 

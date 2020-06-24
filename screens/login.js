@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../constants/loginStyles';
 import { LinearGradient } from 'expo-linear-gradient';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import {  } from 'react-native-gesture-handler';
 import { navigation, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useInput } from '../hooks/useInput';
@@ -36,8 +36,8 @@ export default function Login(props) {
 					password: getCache('password'),
 				});
 				// await AsyncStorage.setItem('@cadastro', jsonValue);
-				sendData('login', jsonValue);
 				console.log(jsonValue);
+				sendData('login', jsonValue);
 				// await AsyncStorage.clear();
 				return navigation.navigate('Groups');
 			} catch (e) {
@@ -56,7 +56,7 @@ export default function Login(props) {
 				style={{ flex: 1 }}>
 				<View style={styles.container}>
 					<Text style={styles.title}>FinFamily</Text>
-					<form onSubmit={handleSubmit}>
+					<form>
 						<TextInput
 							style={styles.input}
 							keyboardobype='email-address'
@@ -74,13 +74,11 @@ export default function Login(props) {
 							onChangeText={(e) => setPassword(e)}
 						/>
 						<View style={styles.buttonForm}>
-							<TouchableOpacity color='#3ED4AF'>
-								{/* <input type='submit' value='Next' /> */}
-								<Text
-									style={styles.txt}
-									onPress={((evt) => evt.preventDefault(), handleSubmit)}>
-									Login
-								</Text>
+							<TouchableOpacity
+								color='#3ED4AF'
+								onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+								{/* <input type='submit' value='Login' /> */}
+								<Text style={styles.txt}>Login</Text>
 							</TouchableOpacity>
 						</View>
 					</form>

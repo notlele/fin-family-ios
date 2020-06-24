@@ -173,7 +173,7 @@ export default function Painel(props) {
 	return (
 		<View style={styles.bg}>
 			<LinearGradient
-				colors={['rgba(52,202,154,0.8)', 'rgba(160,61,179,0.45)']}
+				colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
 				start={[0.5, 0.9]}
 				end={[0.1, 1.0]}
 				style={{ flex: 1 }}>
@@ -183,6 +183,7 @@ export default function Painel(props) {
 							backgroundColor: '#3ED4AF',
 							width: '100%',
 							justifyContent: 'space-around',
+							border: 'none',
 						}}
 						leftComponent={{
 							text: 'Family Panel',
@@ -194,13 +195,37 @@ export default function Painel(props) {
 					/>
 
 					<View style={styles.month}>
-						<TouchableOpacity onPress={() => {}}>
-							<Icon name='keyboard_arrow_left' type='material' color='#000' />
-						</TouchableOpacity>
-						<Text style={styles.monthTxt}>May</Text>
-						<TouchableOpacity onPress={() => {}}>
-							<Icon name='keyboard_arrow_right' type='material' color='#000' />
-						</TouchableOpacity>
+						<Header
+							containerStyle={{
+								backgroundColor: 'none',
+								width: '100%',
+								justifyContent: 'space-around',
+								border: 'none',
+								padding: 'auto 100px',
+							}}
+							leftComponent={{
+								icon: 'keyboard-arrow-left',
+								brand: 'material',
+								color: '#000',
+								// onPress={() => {
+								// 	await AsyncStorage.clear();
+								// 	navigation.navigate('Home');
+								// }}
+							}}
+							centerComponent={{
+								text: 'May',
+								style: { color: '#000' },
+							}}
+							rightComponent={{
+								icon: 'keyboard-arrow-right',
+								brand: 'material',
+								color: '#000',
+								// onPress={() => {
+								// 	await AsyncStorage.clear();
+								// 	navigation.navigate('Home');
+								// }}
+							}}
+						/>
 					</View>
 
 					<View style={styles.center}>
@@ -226,7 +251,7 @@ export default function Painel(props) {
 								}}>
 								<Text style={styles.titleOverview}>Available</Text>
 								<Text style={styles.valueOverview}>1230,00</Text>
-								<Icon name='error_outline' type='material' color='#000' />
+								<Icon name='error-outline' type='material' color='#000' />
 							</View>
 						</View>
 					</View>

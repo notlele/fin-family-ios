@@ -5,7 +5,9 @@ export const sendData = (path, data) => {
 		'application/json;charset=utf-8';
 	axios
 		.post(`http://35.237.149.227/${path}/`, data)
-		.then((res) => {})
+		.then((res) => {
+			return console.log(res.status);
+		})
 		.catch((error) => {
 			const wrongPw = () =>
 				Alert.alert('Error', errorTxt[{ text: 'OK' }], {
