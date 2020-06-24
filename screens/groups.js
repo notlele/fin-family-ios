@@ -193,7 +193,7 @@ export default function Groups(props) {
 	// };
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.bg}>
 			<Header
 				containerStyle={{
 					backgroundColor: '#3ED4AF',
@@ -203,6 +203,7 @@ export default function Groups(props) {
 				leftComponent={{
 					text: 'Groups',
 					style: { color: '#000' },
+					marginLeft: '20px',
 				}}
 				rightComponent={{
 					icon: 'power-settings-new',
@@ -218,34 +219,37 @@ export default function Groups(props) {
 				{/* {groupsList} */}
 				<View style={styles.group}>
 					<TouchableOpacity
-						style={styles.groupImg}
 						onPress={() => {
 							navigation.navigate(`Painel`);
 						}}>
-						<Image />
+						<Image
+							source={'../assets/images/robot-dev.png'}
+							style={styles.groupImg}
+						/>
 						<Text style={styles.groupName}>My Finances</Text>
 					</TouchableOpacity>
 				</View>
 				<View style={styles.group}>
 					<TouchableOpacity
-						style={styles.groupImg}
 						onPress={() => {
 							navigation.navigate(`Painel`);
 						}}>
-						<Image />
+						<Image
+							source={'../assets/images/robot-prod.png'}
+							style={styles.groupImg}
+						/>
 						<Text style={styles.groupName}>Cool Family</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
 
-			<LinearGradient
-				colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
-				start={[0.5, 0.9]}
-				end={[0.1, 1.0]}
-				style={{ flex: 1, height: '32px' }}>
-				<View style={styles.navigator}>
+			<View style={styles.navigator}>
+				<LinearGradient
+					colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
+					start={[0.5, 0.9]}
+					end={[0.1, 1.0]}
+					style={{ flex: 1 }}>
 					<TouchableOpacity
-						style={styles.openButton}
 						onPress={() => {
 							newGroup.setModalVisible(true);
 						}}>
@@ -258,8 +262,8 @@ export default function Groups(props) {
 							}}
 						/>
 					</TouchableOpacity>
-				</View>
-			</LinearGradient>
+				</LinearGradient>
+			</View>
 		</View>
 	);
 }
