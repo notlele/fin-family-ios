@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		// fontFamily: 'Roboto',
 		textAlign: 'center',
+		marginBottom: '10px',
+		borderWidth: 0,
 	},
 	center: {
 		justifyContent: 'center',
@@ -40,7 +42,6 @@ const styles = StyleSheet.create({
 	},
 	buttons: {
 		width: '80%',
-		borderStyle: 'solid',
 		margin: 'auto',
 	},
 	button1: {
@@ -67,15 +68,12 @@ const styles = StyleSheet.create({
 	},
 	overview: {
 		width: '100%',
-		height: '65%',
+		height: '70%',
 		margin: 'auto',
 		position: 'absolute',
 	},
 	circleOverview: {
 		backgroundColor: 'white',
-		// borderColor: 'red',
-		// borderStyle: 'solid',
-		// width: 99,
 		height: '100%',
 		borderRadius: 200,
 		borderWidth: 0,
@@ -147,10 +145,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	navigator: {
-		// flex: 1,
-		// flexDirection: 'row',
 		width: '100%',
-		justifyContent: 'space-between',
 	},
 	groupList: {
 		flex: 1,

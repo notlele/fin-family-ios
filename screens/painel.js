@@ -287,7 +287,6 @@ export default function Painel(props) {
 							</LinearGradient>
 						</View>
 					</View>
-
 					<View style={styles.buttons}>
 						<View style={styles.button1}>
 							<TouchableOpacity
@@ -297,36 +296,35 @@ export default function Painel(props) {
 							</TouchableOpacity>
 						</View>
 					</View>
-
-					<LinearGradient
-						colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
-						start={[0.5, 0.9]}
-						end={[0.1, 1.0]}
-						style={{ flex: 1, height: '32px' }}>
-						<View style={styles.navigator}>
-							<NavigationContainer independent={true}>
-								<Tab.Navigator
-									screenOptions={({ route }) => ({
-										tabBarIcon: ({ focused, color, size }) => {
-											let iconName;
-
-											if (route.name === 'Groups') {
-												iconName = focused ? 'home' : 'home-outline';
-											} else if (route.name === 'Members') {
-												iconName = focused ? 'group' : 'group-outline';
-											} else if (route.name === 'Extrato') {
-												iconName = focused ? 'add' : 'add-circle-outline';
-											}
-											return <Icon name={iconName} color={'#000'} />;
-										},
-									})}>
-									<Tab.Screen name='Groups' component={Groups} />
-									<Tab.Screen name='Extrato' component={Extrato} />
-									<Tab.Screen name='Members' component={Members} />
-								</Tab.Navigator>
-							</NavigationContainer>
-						</View>
-					</LinearGradient>
+				</View>
+				<View style={styles.navigator}>
+					<NavigationContainer independent={true}>
+						<Tab.Navigator
+							screenOptions={({ route }) => ({
+								tabBarIcon: () => {
+									let iconName;
+									if (route.name === 'Groups') {
+										iconName = 'home';
+									} else if (route.name === 'Members') {
+										iconName = 'group';
+									} else if (route.name === 'Extrato') {
+										iconName = 'add';
+									}
+									return <Icon name={iconName} size={20} color={'#000'} />;
+								},
+							})}
+							tabBarOptions={{
+								showLabel: false,
+								style: {
+									backgroundColor: 'rgba(0,0,0,0.0)',
+									height: '32px',
+								},
+							}}>
+							<Tab.Screen name='Groups' component={Groups} />
+							<Tab.Screen name='Extrato' component={Extrato} />
+							<Tab.Screen name='Members' component={Members} />
+						</Tab.Navigator>
+					</NavigationContainer>
 				</View>
 			</LinearGradient>
 		</View>
