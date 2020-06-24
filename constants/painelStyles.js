@@ -146,6 +146,19 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		textAlign: 'center',
 	},
+	navigator: {
+		// flex: 1,
+		// flexDirection: 'row',
+		width: '100%',
+		justifyContent: 'space-between',
+	},
+	groupList: {
+		flex: 1,
+		width: '50%',
+		height: '60%',
+		margin: '10px',
+		justifyContent: 'space-around',
+	},
 });
 
 export default styles;

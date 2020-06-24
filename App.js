@@ -51,8 +51,8 @@ export default function App(props) {
 						<Stack.Screen name='Cadastro' component={Cadastro} />
 						<Stack.Screen name='Groups' component={Groups} />
 						<Stack.Screen name='Painel' component={Painel} />
-						{/* <Stack.Screen name='Extrato' component={Extrato} />
-						<Stack.Screen name='Members' component={Members} /> */}
+						<Stack.Screen name='Extrato' component={Extrato} />
+						<Stack.Screen name='Members' component={Members} />
 						<Stack.Screen name='Profile' component={Profile} />
 					</Stack.Navigator>
 				</NavigationContainer>

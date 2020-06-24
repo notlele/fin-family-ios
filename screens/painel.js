@@ -3,11 +3,21 @@ import styles from '../constants/painelStyles';
 import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
-import { navigation, useNavigation } from '@react-navigation/native';
+import {
+	navigation,
+	useNavigation,
+	NavigationContainer,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
+import Home from './home';
+import Members from './members';
+import Groups from './groups';
 import { sendData } from '../hooks/sendData';
 import { getData } from '../hooks/getData';
 import { getCache } from '../hooks/getCache';
+
+const Tab = createBottomTabNavigator();
 
 export default function Painel(props) {
 	const navigation = useNavigation();
@@ -287,6 +297,36 @@ export default function Painel(props) {
 							</TouchableOpacity>
 						</View>
 					</View>
+
+					<LinearGradient
+						colors={['rgba(169,241,242,0.8)', 'rgba(160,61,179,0.45)']}
+						start={[0.5, 0.9]}
+						end={[0.1, 1.0]}
+						style={{ flex: 1, height: '32px' }}>
+						<View style={styles.navigator}>
+							<NavigationContainer independent={true}>
+								<Tab.Navigator
+									screenOptions={({ route }) => ({
+										tabBarIcon: ({ focused, color, size }) => {
+											let iconName;
+
+											if (route.name === 'Groups') {
+												iconName = focused ? 'home' : 'home-outline';
+											} else if (route.name === 'Members') {
+												iconName = focused ? 'group' : 'group-outline';
+											} else if (route.name === 'Extrato') {
+												iconName = focused ? 'add' : 'add-circle-outline';
+											}
+											return <Icon name={iconName} color={'#000'} />;
+										},
+									})}>
+									<Tab.Screen name='Groups' component={Groups} />
+									<Tab.Screen name='Extrato' component={Extrato} />
+									<Tab.Screen name='Members' component={Members} />
+								</Tab.Navigator>
+							</NavigationContainer>
+						</View>
+					</LinearGradient>
 				</View>
 			</LinearGradient>
 		</View>
