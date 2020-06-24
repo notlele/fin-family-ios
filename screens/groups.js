@@ -9,6 +9,7 @@ import {
 	Image,
 } from 'react-native';
 import { navigation, useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 // import ImagePicker from 'react-native-image-picker';
 import { Header, Icon } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';

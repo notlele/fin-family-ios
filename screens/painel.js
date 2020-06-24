@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
-import Home from './home';
+import Extrato from './extrato';
 import Members from './members';
 import Groups from './groups';
 import { sendData } from '../hooks/sendData';
