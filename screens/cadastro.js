@@ -241,29 +241,7 @@ export default function Cadastro(props) {
 				}
 			};
 
-			// set json
-			async (value) => {
-				try {
-					const jsonValue = JSON.stringify({
-						full_name: getCache('nome'),
-						cpf: getCache('cpf'),
-						birthday: getCache('dob'),
-						email: getCache('email'),
-						password: getCache('password'),
-						nickname: getCache('nickname'),
-						phone_area_code: getCache('areaCode'),
-						phone: getCache('phone'),
-					});
-					// await AsyncStorage.setItem('@cadastro', jsonValue);
-					sendData('cadastro', jsonValue);
-					console.log(jsonValue);
-					return navigation.navigate('Groups');
-					// await AsyncStorage.clear();
-				} catch (e) {
-					console.log(e);
-					// save error
-				}
-			};
+			return navigation.navigate('Groups');
 		};
 
 		return (

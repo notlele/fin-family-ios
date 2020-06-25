@@ -33,7 +33,7 @@ export default function Groups(props) {
 						group_name: getCache('groupName'),
 					});
 					// await AsyncStorage.setItem('@cadastro', jsonValue);
-					sendData('groups', jsonValue);
+					// sendData('groups', jsonValue);
 					console.log(jsonValue);
 					setModalVisible(!modalVisible);
 					// await AsyncStorage.clear();
@@ -117,80 +117,6 @@ export default function Groups(props) {
 			);
 		};
 	};
-
-	// get groups list
-	// const groupsList = () => {
-	// 	const [groups, setGroups] = useState({
-	// 		items: {
-	// 			group_name: '',
-	// 			cont: 0,
-	// 		},
-	// 	});
-	// 	// Similar to componentDidMount and componentDidUpdate:
-	// 	useEffect(() => {
-	// 		axios.defaults.headers.post['Content-Type'] =
-	// 			'application/json;charset=utf-8';
-	// 		axios
-	// 			.get(`http://35.237.149.227/groups/`, getCache('cpf'))
-	// 			.then((resultData) => {
-	// 				setGroups(resultData.d.results);
-	// 			})
-	// 			.catch((error, jqXHR, textStatus, errorThrown) => {
-	// 				const fetchError = () =>
-	// 					Alert.alert('Error', errorTxt[{ text: 'OK' }], {
-	// 						cancelable: false,
-	// 					});
-	// 				if (error.response.status === 500) {
-	// 					console.log('Dados inválidos!');
-	// 					errorTxt = 'Please try again';
-	// 				} else if (error.response.status === 404) {
-	// 					console.log('Grupos não existem!');
-	// 					errorTxt = 'No groups for this user!';
-	// 				}
-	// 				return fetchError;
-	// 			});
-	// 	});
-
-	// 	return (
-	// 		<View style={styles.centeredView}>
-	// 			{groups.items.length > 0 ? (
-	// 				groups.items.map(function (item, key) {
-	// 					console.log(item);
-	// 					item.cont++;
-	// 					setStringValue = async (value) => {
-	// 						try {
-	// 							await AsyncStorage.setItem(
-	// 								`@group${item.cont}`,
-	// 								item.group_name
-	// 							);
-	// 						} catch (e) {
-	// 							console.log(e);
-	// 							// save error
-	// 						}
-	// 					};
-	// 					return (
-	// 						<View style={styles.group}>
-	// 							<TouchableOpacity
-	// 								style={styles.groupImg}
-	// 								onPress={() => {
-	// 									navigation.navigate(`Painel`);
-	// 								}}>
-	// 								<Image />
-	// 								<Text style={styles.groupName}>{item.group_name}</Text>
-	// 							</TouchableOpacity>
-	// 						</View>
-	// 					);
-	// 				})
-	// 			) : (
-	// 				<View style={styles.group}>
-	// 					<Image />
-	// 					<Text style={styles.groupName}>No Groups!</Text>
-	// 				</View>
-	// 			)}
-	// 			);
-	// 		</View>
-	// 	);
-	// };
 
 	return (
 		<View style={styles.container}>

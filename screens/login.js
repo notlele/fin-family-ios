@@ -6,7 +6,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { navigation, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useInput } from '../hooks/useInput';
-import { sendData } from '../hooks/sendData';
 import { getCache } from '../hooks/getCache';
 
 export default function Login(props) {
@@ -27,24 +26,7 @@ export default function Login(props) {
 				//save error
 			}
 		};
-
-		// set json and post login
-		async (value) => {
-			try {
-				const jsonValue = JSON.stringify({
-					email: getCache('email'),
-					password: getCache('password'),
-				});
-				// await AsyncStorage.setItem('@cadastro', jsonValue);
-				console.log(jsonValue);
-				sendData('login', jsonValue);
-				// await AsyncStorage.clear();
-				return navigation.navigate('Groups');
-			} catch (e) {
-				console.log(e);
-				// save error
-			}
-		};
+		return navigation.navigate('Groups');
 	};
 
 	return (

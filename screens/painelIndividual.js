@@ -3,11 +3,21 @@ import styles from '../constants/painelStyles';
 import { Text, View, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
-import { navigation, useNavigation } from '@react-navigation/native';
+import {
+	navigation,
+	useNavigation,
+	NavigationContainer,
+} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-community/async-storage';
+import Extrato from './extrato';
+import Members from './members';
+import Groups from './groups';
 import { sendData } from '../hooks/sendData';
 import { getData } from '../hooks/getData';
 import { getCache } from '../hooks/getCache';
+
+const Tab = createBottomTabNavigator();
 
 export default function Painel(props) {
 	const navigation = useNavigation();
@@ -43,131 +53,89 @@ export default function Painel(props) {
 	// add new entry
 	const newEntry = () => {
 		const [modalVisible, setModalVisible] = useState(false);
-		const [groupName, setgroupName] = useState('');
 
 		const handleSubmit = (event) => {
 			event.preventDefault();
-			setObjectValue = async (value) => {
-				try {
-					const jsonValue = JSON.stringify({
-						group_name: getCache('groupName'),
-					});
-					// await AsyncStorage.setItem('@cadastro', jsonValue);
-					sendData('groups', jsonValue);
-					console.log(jsonValue);
-					setModalVisible(!modalVisible);
-					// await AsyncStorage.clear();
-					return navigation.navigate('Groups');
-				} catch (e) {
-					console.log(e);
-					setgroupName('');
-					return () =>
-						Alert.alert('Error', 'Please try again.', [{ text: 'OK' }], {
-							cancelable: false,
-						});
-					// save error
-				}
-			};
-
-			return (
-				<Modal animationType='slide' transparent={true} visible={modalVisible}>
-					<View style={styles.centeredView}>
-						<View style={styles.modalView}>
-							<Text style={styles.modalText}>New Group</Text>
-							<TextInput
-								style={styles.input}
-								textContentType='text'
-								placeholder='Name'
-								value={groupName}
-								onChangeText={(e) => setgroupName(e.target.value)}
-							/>
-
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={() => {
-									// picker;
-								}}>
-								<Icon name='insert_photo' type='material' color='#000' />
-								<Text style={styles.modalText}>upload image</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={() => {
-									handleSubmit;
-								}}>
-								<Icon name='done' type='material' color='#000' />
-							</TouchableOpacity>
-						</View>
-					</View>
-				</Modal>
-			);
+			return () => setModalVisible(!modalVisible);
 		};
+
+		return (
+			<Modal animationType='slide' transparent={true} visible={modalVisible}>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>New Group</Text>
+						<TextInput
+							style={styles.input}
+							textContentType='text'
+							placeholder='Name'
+							value={groupName}
+							onChangeText={(e) => setgroupName(e.target.value)}
+						/>
+
+						<TouchableOpacity
+							color='#3ED4AF'
+							onPress={() => {
+								// picker;
+							}}>
+							<Icon name='insert_photo' type='material' color='#000' />
+							<Text style={styles.modalText}>upload image</Text>
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							color='#3ED4AF'
+							onPress={() => {
+								handleSubmit;
+							}}>
+							<Icon name='done' type='material' color='#000' />
+						</TouchableOpacity>
+					</View>
+				</View>
+			</Modal>
+		);
 	};
 
 	// add new expense
 	const newExpense = () => {
 		const [modalVisible, setModalVisible] = useState(false);
-		const [groupName, setgroupName] = useState('');
 
 		const handleSubmit = (event) => {
 			event.preventDefault();
-			setObjectValue = async (value) => {
-				try {
-					const jsonValue = JSON.stringify({
-						group_name: getCache('groupName'),
-					});
-					// await AsyncStorage.setItem('@cadastro', jsonValue);
-					sendData('groups', jsonValue);
-					console.log(jsonValue);
-					setModalVisible(!modalVisible);
-					// await AsyncStorage.clear();
-					return navigation.navigate('Groups');
-				} catch (e) {
-					console.log(e);
-					setgroupName('');
-					return () =>
-						Alert.alert('Error', 'Please try again.', [{ text: 'OK' }], {
-							cancelable: false,
-						});
-					// save error
-				}
-			};
-
-			return (
-				<Modal animationType='slide' transparent={true} visible={modalVisible}>
-					<View style={styles.centeredView}>
-						<View style={styles.modalView}>
-							<Text style={styles.modalText}>New Group</Text>
-							<TextInput
-								style={styles.input}
-								textContentType='text'
-								placeholder='Name'
-								value={groupName}
-								onChangeText={(e) => setgroupName(e.target.value)}
-							/>
-
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={() => {
-									// picker;
-								}}>
-								<Icon name='insert_photo' type='material' color='#000' />
-								<Text style={styles.modalText}>upload image</Text>
-							</TouchableOpacity>
-
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={() => {
-									handleSubmit;
-								}}>
-								<Icon name='done' type='material' color='#000' />
-							</TouchableOpacity>
-						</View>
-					</View>
-				</Modal>
-			);
+			return () => setModalVisible(!modalVisible);
 		};
+
+		return (
+			<Modal animationType='slide' transparent={true} visible={modalVisible}>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>New Group</Text>
+						<TextInput
+							style={styles.input}
+							textContentType='text'
+							placeholder='Name'
+							value={groupName}
+							onChangeText={(e) => setgroupName(e.target.value)}
+						/>
+
+						<TouchableOpacity
+							color='#3ED4AF'
+							onPress={() => {
+								// picker;
+							}}>
+							<Icon name='insert_photo' type='material' color='#000' />
+							<Text style={styles.modalText}>upload image</Text>
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							color='#3ED4AF'
+							onPress={() => {
+								handleSubmit;
+							}}>
+							<Icon name='done' type='material' color='#000' />
+						</TouchableOpacity>
+					</View>
+				</View>
+			</Modal>
+		);
 	};
 
 	return (
@@ -277,7 +245,6 @@ export default function Painel(props) {
 							</LinearGradient>
 						</View>
 					</View>
-
 					<View style={styles.buttons}>
 						<View style={styles.button1}>
 							<TouchableOpacity
@@ -287,6 +254,35 @@ export default function Painel(props) {
 							</TouchableOpacity>
 						</View>
 					</View>
+				</View>
+				<View style={styles.navigator}>
+					<NavigationContainer independent={true}>
+						<Tab.Navigator
+							screenOptions={({ route }) => ({
+								tabBarIcon: () => {
+									let iconName;
+									if (route.name === 'Groups') {
+										iconName = 'home';
+									} else if (route.name === 'Members') {
+										iconName = 'group';
+									} else if (route.name === 'Extrato') {
+										iconName = 'add';
+									}
+									return <Icon name={iconName} size={20} color={'#000'} />;
+								},
+							})}
+							tabBarOptions={{
+								showLabel: false,
+								style: {
+									backgroundColor: 'rgba(0,0,0,0.0)',
+									height: '32px',
+								},
+							}}>
+							<Tab.Screen name='Groups' component={Groups} />
+							<Tab.Screen name='Extrato' component={Extrato} />
+							<Tab.Screen name='Members' component={Members} />
+						</Tab.Navigator>
+					</NavigationContainer>
 				</View>
 			</LinearGradient>
 		</View>
