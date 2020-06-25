@@ -18,13 +18,15 @@ export default function Cadastro(props) {
 		const [nome, setNome] = useState('');
 		const [cpf, setCpf] = useState('');
 		const [dob, setDob] = useState('');
+		let cpfField = '';
+		let datetimeField = '';
 
 		const handleSubmit = (evt) => {
 			// evt.preventDefault();
 			// check data before next screen
-			const cpfIsValid = cpf.cpfField.isValid();
-			const dobIsValid = dob.datetimeField.isValid();
-			const unmaskedCpf = cpf.cpfField.getRawValue();
+			const cpfIsValid = cpfField.isValid();
+			const dobIsValid = datetimeField.isValid();
+			const unmaskedCpf = cpfField.getRawValue();
 
 			if (cpfIsValid && dobIsValid) {
 				// save data locally
@@ -39,7 +41,7 @@ export default function Cadastro(props) {
 						//save error
 					}
 				};
-				return navigation.navigate('Cadastro2');
+				return <Cadastro2 />;
 			} else if (!cpfIsValid) {
 				setCpf('');
 				return () =>
@@ -83,7 +85,7 @@ export default function Cadastro(props) {
 								includeRawValueInChangeText={true}
 								onChangeText={(e) => setCpf(e)}
 								// add the ref to a local var
-								// ref={(ref) => cpfField = ref}
+								ref={(ref) => cpfField = ref}
 								placeholder='CPF'
 								// maxLength={14}
 							/>
@@ -95,9 +97,9 @@ export default function Cadastro(props) {
 								}}
 								value={dob}
 								onChangeText={(e) => setDob(e)}
-								// ref={(ref) => {
-								// 	dtField = ref;
-								// }}
+								ref={(ref) => {
+									datetimeField = ref;
+								}}
 								placeholder='Date of Birth'
 								// maxLength={8}
 							/>
@@ -144,7 +146,7 @@ export default function Cadastro(props) {
 						//save error
 					}
 				};
-				return navigation.navigate('Cadastro3');
+				return <Cadastro3 />;
 			} else {
 				return () =>
 					Alert.alert(
