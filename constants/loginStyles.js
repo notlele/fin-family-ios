@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
 	bg: {
 		backgroundColor: 'black',
 		flex: 1,
-		
 	},
 	container: {
 		flex: 1,
@@ -50,32 +49,54 @@ const styles = StyleSheet.create({
 		borderWidth: 6,
 		borderColor: '#65E674',
 		borderStyle: 'solid',
-		width: '80%',
-		marginTop: 30,
+		width: '90%',
+		marginTop: 50,
 	},
 	buttonHelp: {
-		margin: 10,
+		margin: 5,
 		marginLeft: '10%',
 		backgroundColor: 'none',
 		fontSize: 14,
 		fontWeight: 'light',
 		color: 'white',
 		textAlign: 'right',
-		width: '80%',
+		width: '83%',
 	},
 	txt: {
 		fontSize: 20,
 		fontWeight: '700',
 	},
-	formInput: {},
+	form: {
+		width: '95%',
+		marginTop: 10,
+	},
 	input: {
-		margin: 8,
+		margin: 1,
 		backgroundColor: '#fff',
 		borderRadius: 30,
-		borderWidth: 12,
-		borderColor: '#fff',
+		borderWidth: 1,
+		borderColor: '#rgba(0,0,0,0.7)',
 		borderStyle: 'solid',
-		width: '80%',
+		// width: '80%',
+	},
+	phoneNumber: {
+		flex: 1,
+		flexDirection: 'row',
+	},
+	inputCSmall: {
+		width: '24%',
+	},
+	inputSmall: {
+		padding: 4,
+		paddingLeft: 20,
+		backgroundColor: '#fff',
+		borderRadius: 30,
+		borderWidth: 1,
+		borderColor: '#rgba(0,0,0,0.7)',
+		borderStyle: 'solid',
+	},
+	inputMedium: {
+		width: '76%',
 	},
 	titleCreate: {
 		fontSize: 40,

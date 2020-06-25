@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../constants/loginStyles';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Icon, Input } from 'react-native-elements';
 // import {  } from 'react-native-gesture-handler';
 import { navigation, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -38,32 +39,50 @@ export default function Login(props) {
 				style={{ flex: 1 }}>
 				<View style={styles.container}>
 					<Text style={styles.title}>FinFamily</Text>
-					<form>
-						<TextInput
-							style={styles.input}
-							keyboardobype='email-address'
-							textContentType='emailAddress'
-							placeholder='E-Mail for access'
-							value={email}
-							onChangeText={(e) => setEmail(e)}
-						/>
-						<TextInput
-							style={styles.input}
-							type='password'
-							secureTextEntry={true}
-							placeholder='Password'
-							value={password}
-							onChangeText={(e) => setPassword(e)}
-						/>
-						<View style={styles.buttonForm}>
-							<TouchableOpacity
-								color='#3ED4AF'
-								onPress={((evt) => evt.preventDefault(), handleSubmit)}>
-								{/* <input type='submit' value='Login' /> */}
-								<Text style={styles.txt}>Login</Text>
-							</TouchableOpacity>
-						</View>
-					</form>
+					<View style={styles.form}>
+						<form onSubmit={handleSubmit}>
+							<Input
+								leftIcon={
+									<Icon
+										name='mail-outline'
+										type='material'
+										color='#rgba(0,0,0,0.7)'
+									/>
+								}
+								leftIconContainerStyle={{ marginLeft: 15, marginRight: 5 }}
+								inputContainerStyle={styles.input}
+								keyboardobype='email-address'
+								textContentType='emailAddress'
+								placeholder='E-mail'
+								value={email}
+								onChangeText={(e) => setEmail(e)}
+							/>
+							<Input
+								leftIcon={
+									<Icon
+										name='lock-outline'
+										type='material'
+										color='#rgba(0,0,0,0.7)'
+									/>
+								}
+								leftIconContainerStyle={{ marginLeft: 15, marginRight: 5 }}
+								inputContainerStyle={styles.input}
+								type='password'
+								secureTextEntry={true}
+								placeholder='Password'
+								value={password}
+								onChangeText={(e) => setPassword(e)}
+							/>
+							<View style={styles.buttonForm}>
+								<TouchableOpacity
+									color='#3ED4AF'
+									onPress={((evt) => evt.preventDefault(), handleSubmit)}>
+									{/* <input type='submit' value='Login' /> */}
+									<Text style={styles.txt}>Login</Text>
+								</TouchableOpacity>
+							</View>
+						</form>
+					</View>
 
 					<View style={styles.buttonHelp}>
 						<TouchableOpacity color='#3ED4AF'>

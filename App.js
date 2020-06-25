@@ -6,6 +6,8 @@ import useLinking from './navigation/useLinking';
 import Home from './screens/home';
 import Login from './screens/login';
 import Cadastro from './screens/cadastro';
+import Cadastro2 from './screens/cadastro2';
+import Cadastro3 from './screens/cadastro3';
 import Groups from './screens/groups';
 import Painel from './screens/Painel';
 import Extrato from './screens/extrato';
@@ -46,14 +48,86 @@ export default function App(props) {
 					ref={containerRef}
 					initialState={initialNavigationState}>
 					<Stack.Navigator>
-						<Stack.Screen name='Home' component={Home} />
-						<Stack.Screen name='Login' component={Login} />
-						<Stack.Screen name='Cadastro' component={Cadastro} />
-						<Stack.Screen name='Groups' component={Groups} />
-						<Stack.Screen name='Painel' component={Painel} />
-						<Stack.Screen name='Extrato' component={Extrato} />
-						<Stack.Screen name='Members' component={Members} />
-						<Stack.Screen name='Profile' component={Profile} />
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Home'
+							component={Home}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Login'
+							component={Login}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Cadastro'
+							component={Cadastro}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Cadastro2'
+							component={Cadastro2}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Cadastro3'
+							component={Cadastro3}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Groups'
+							component={Groups}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Painel'
+							component={Painel}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Extrato'
+							component={Extrato}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Members'
+							component={Members}
+						/>
+						<Stack.Screen
+							options={{
+								headerTransparent: true,
+								headerShown: false,
+							}}
+							name='Profile'
+							component={Profile}
+						/>
 					</Stack.Navigator>
 				</NavigationContainer>
 			</View>

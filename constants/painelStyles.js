@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 		// fontFamily: 'Roboto',
 		textAlign: 'center',
 		width: '90%',
-		height: '70%',
+		height: '65%',
 	},
 	moneyDetails: {
 		flex: 1,
